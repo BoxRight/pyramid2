@@ -1,0 +1,25 @@
+{
+  "cascade": true,
+  "executions": [
+    {
+      "instance": "enhanced_solar_contract",
+      "results_file": "laml_results_enhanced_solar_contract.json"
+    },
+    {
+      "instance": "sales_component",
+      "results_file": "laml_results_sales_component.json"
+    },
+    {
+      "instance": "permits_component",
+      "results_file": "laml_results_permits_component.json"
+    },
+    {
+      "instance": "rights_lease_component",
+      "results_file": "laml_results_rights_lease_component.json"
+    },
+    {
+      "instance": "core_lease_component",
+      "results_file": "laml_results_core_lease_component.json"
+    }
+  ]
+}

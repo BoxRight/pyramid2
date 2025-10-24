@@ -1,0 +1,14 @@
+# No Profit from Wrongdoing Principle
+#
+# A fundamental legal principle: no one should be allowed to profit from their own wrongful act.
+# If a wrongful act is performed, the wrongdoer is forbidden from obtaining the benefit.
+#
+# Usage: apply no_profit_from_wrongdoing(WrongfulAct, Benefit)
+#
+# Legal Basis: Riggs v. Palmer (1889) - Grandson who murdered grandfather to 
+# accelerate inheritance was denied the estate despite valid will.
+
+principle no_profit_from_wrongdoing(WrongfulAct, Benefit) {
+    prevention_rule = WrongfulAct implies forbid(Benefit)
+}
+

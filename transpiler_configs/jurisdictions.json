@@ -1,0 +1,44 @@
+{
+  "mexican_lease": {
+    "title": "CONTRATO DE ARRENDAMIENTO DE SISTEMA DE ENERGÍA SOLAR",
+    "legal_references": [
+      "Artículo 1336, 1337, 1340, 1342 del Código Civil para el Estado Libre y Soberano de Puebla",
+      "Artículo 130 de la Ley del Impuesto sobre la Renta",
+      "Ley de Transición Energética"
+    ],
+    "subject": "Contrato de arrendamiento de sistema de energía solar entre persona física y persona moral, incluyendo generación, interconexión y venta de excedentes",
+    "party_identification": {
+      "lessor_patterns": ["Corp", "Company", "S.A.", "S.A. de C.V."],
+      "lessee_patterns": ["Owner", "Person", "Individual"]
+    },
+    "language": "spanish"
+  },
+  "us_lease": {
+    "title": "SOLAR ENERGY SYSTEM LEASE AGREEMENT",
+    "legal_references": [
+      "Uniform Commercial Code Article 2A",
+      "Internal Revenue Code Section 48",
+      "Public Utility Regulatory Policies Act"
+    ],
+    "subject": "Lease agreement for solar energy system between individual and corporate entity, including generation, interconnection, and surplus sales",
+    "party_identification": {
+      "lessor_patterns": ["Corp", "Company", "LLC", "Inc."],
+      "lessee_patterns": ["Owner", "Person", "Individual"]
+    },
+    "language": "english"
+  },
+  "eu_lease": {
+    "title": "SOLAR ENERGY SYSTEM LEASE AGREEMENT",
+    "legal_references": [
+      "Directive 2018/2001 on the promotion of the use of energy from renewable sources",
+      "General Data Protection Regulation (GDPR)",
+      "Consumer Rights Directive 2011/83/EU"
+    ],
+    "subject": "Lease agreement for solar energy system in compliance with EU renewable energy regulations",
+    "party_identification": {
+      "lessor_patterns": ["Ltd", "Limited", "GmbH", "S.A."],
+      "lessee_patterns": ["Owner", "Person", "Individual"]
+    },
+    "language": "english"
+  }
+}

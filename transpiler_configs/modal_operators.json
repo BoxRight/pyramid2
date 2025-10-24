@@ -1,0 +1,17 @@
+{
+  "mexican_lease": {
+    "oblig": "se obliga a",
+    "claim": "tiene derecho a",
+    "forbid": "queda prohibido"
+  },
+  "us_lease": {
+    "oblig": "is obligated to",
+    "claim": "has the right to",
+    "forbid": "is prohibited from"
+  },
+  "eu_lease": {
+    "oblig": "is obligated to",
+    "claim": "has the right to",
+    "forbid": "is prohibited from"
+  }
+}

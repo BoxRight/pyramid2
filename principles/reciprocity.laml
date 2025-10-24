@@ -1,0 +1,13 @@
+# @id: Principio de Reciprocidad
+# @derives: CCF_ART1794
+# @priority: HIGH
+#
+# Usage: apply reciprocity(ActionA, ActionB)
+#
+# Legal Basis: Foundational principle in contract law, establishing bilateral obligations.
+
+principle reciprocity(ActionA, ActionB) {
+    forward_obligation = ActionA implies claim(ActionB)
+    reverse_obligation = ActionB implies claim(ActionA)
+}
+

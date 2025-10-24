@@ -1,0 +1,103 @@
+# /laws/ccf_lease_special.laml
+
+lease_special_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+
+    # Special provisions acts
+    authorize_subletting(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    sublet_authorized(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    sublet_unauthorized(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    pay_authorized_improvements(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    pay_useful_improvements(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    pay_improvements_indeterminate(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    pay_improvements_mandatory(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    notify_usurpation(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    apply_eviction_provisions(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    respond_bad_faith_eviction(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # Conditional predicates
+    subletting_authorization_required(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    subletting_authorized(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    subletting_unauthorized(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improvements_contract_authorized(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improvements_posterior_authorized(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improvements_obligation_payment(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improvements_mandatory_payment(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    usurpation_harmful_novelty(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    eviction_predio_occurred(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    bad_faith_eviction(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # @id: Cláusula Primera - Autorización de Subarriendo
+    # @derives: CCF_ART2480
+    # @priority: HIGH
+    # Only if subletting authorization required
+    rule_oblig_authorize_subletting = subletting_authorization_required(lessor, item, lessee) 
+                                      implies oblig(authorize_subletting(lessor, item, lessee))
+
+    # @id: Cláusula Segunda - Subarriendo Autorizado
+    # @derives: CCF_ART2480
+    # @priority: HIGH
+    # Only if subletting authorized
+    rule_right_sublet_authorized = subletting_authorized(lessor, item, lessee) 
+                                   implies claim(sublet_authorized(lessee, item, lessor))
+
+    # @id: Cláusula Tercera - Prohibición de Subarriendo No Autorizado
+    # @derives: CCF_ART2480
+    # @priority: HIGH
+    # Only if subletting unauthorized
+    rule_prohibit_sublet_unauthorized = subletting_unauthorized(lessor, item, lessee) 
+                                         implies forbid(sublet_unauthorized(lessee, item, lessor))
+
+    # @id: Cláusula Cuarta - Pago de Mejoras Autorizadas por Contrato
+    # @derives: CCF_ART2423
+    # @priority: HIGH
+    # Only if improvements contract authorized
+    rule_oblig_pay_authorized_improvements = improvements_contract_authorized(lessor, item, lessee) 
+                                            implies oblig(pay_authorized_improvements(lessor, item, lessee))
+
+    # @id: Cláusula Quinta - Pago de Mejoras Útiles Posteriores
+    # @derives: CCF_ART2424
+    # @priority: HIGH
+    # Only if improvements posterior authorized
+    rule_oblig_pay_useful_improvements = improvements_posterior_authorized(lessor, item, lessee) 
+                                         implies oblig(pay_useful_improvements(lessor, item, lessee))
+
+    # @id: Cláusula Sexta - Pago de Mejoras Indeterminadas
+    # @derives: CCF_ART2424
+    # @priority: HIGH
+    # Only if improvements obligation payment
+    rule_oblig_pay_improvements_indeterminate = improvements_obligation_payment(lessor, item, lessee) 
+                                                 implies oblig(pay_improvements_indeterminate(lessor, item, lessee))
+
+    # @id: Cláusula Séptima - Pago Obligatorio de Mejoras
+    # @derives: CCF_ART2424
+    # @priority: HIGH
+    # Only if improvements mandatory payment
+    rule_oblig_pay_improvements_mandatory = improvements_mandatory_payment(lessor, item, lessee) 
+                                             implies oblig(pay_improvements_mandatory(lessor, item, lessee))
+
+    # @id: Cláusula Octava - Notificación de Usurpación
+    # @derives: CCF_ART2419
+    # @priority: HIGH
+    # Only if usurpation harmful novelty
+    rule_oblig_notify_usurpation = usurpation_harmful_novelty(lessee, item, lessor) 
+                                   implies oblig(notify_usurpation(lessee, item, lessor))
+
+    # @id: Cláusula Novena - Aplicación de Disposiciones de Desalojo
+    # @derives: CCF_ART2434
+    # @priority: HIGH
+    # Only if eviction predio occurred
+    rule_oblig_apply_eviction = eviction_predio_occurred(lessor, item, lessee) 
+                                implies oblig(apply_eviction_provisions(lessor, item, lessee))
+
+    # @id: Cláusula Décima - Responsabilidad por Desalojo de Mala Fe
+    # @derives: CCF_ART2434
+    # @priority: HIGH
+    # Only if bad faith eviction
+    rule_oblig_bad_faith_eviction = bad_faith_eviction(lessor, item, lessee) 
+                                    implies oblig(respond_bad_faith_eviction(lessor, item, lessee))
+}

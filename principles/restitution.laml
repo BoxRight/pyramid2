@@ -1,0 +1,13 @@
+# Restitution Principle
+#
+# When a party breaches a contract or wrongfully benefits, they have an obligation
+# to restore the other party to their original position.
+#
+# Usage: apply restitution(Breach, Restoration)
+#
+# Legal Basis: Equitable remedy in contract law and unjust enrichment doctrine.
+
+principle restitution(Breach, Restoration) {
+    restoration_obligation = Breach implies oblig(Restoration)
+}
+

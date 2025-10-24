@@ -1,0 +1,183 @@
+# /laws/ccf_rescission_grounds.laml
+import "../principles/rescission.laml"
+
+rescission_grounds_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+    State_entity(state) = Person(state, legal)
+
+    # Rescission grounds acts
+    rescind_expropriation(state, item, lessor, lessee) = State_entity(state), Item(item), Lessor(lessor), Lessee(lessee)
+    pay_improvements(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    pay_improvements_termination(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_impediment_prolonged(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_impediment_partial(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_non_payment(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_improper_use(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_unauthorized_subletting(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_serious_damage(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_form_variation(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_conservation_failure(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_item_loss(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_hidden_defects(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescind_opposition_subletting(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # Conditional predicates
+    expropriation_public_utility(state, item, lessor, lessee) = State_entity(state), Item(item), Lessor(lessor), Lessee(lessee)
+    useful_improvements_made(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    rescission_lessor_fault(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improvements_authorized(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    termination_before_compensation(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    impediment_prolonged(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    impediment_partial_prolonged(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    non_payment_rent(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improper_use_detected(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    unauthorized_subletting(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    serious_damage_attributable(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    form_variation_unauthorized(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    conservation_failure(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    item_loss_total_partial(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    hidden_defects_unknown(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    opposition_subletting_unfounded(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # @id: Cláusula Primera - Rescisión por Expropiación
+    # @derives: CCF_ART2489
+    # @priority: HIGH
+    # Only if expropriation for public utility
+    rule_right_expropriation_rescission = expropriation_public_utility(state, item, lessor, lessee) 
+                                          implies claim(rescind_expropriation(state, item, lessor, lessee))
+
+    # @id: Cláusula Segunda - Pago de Mejoras Útiles
+    # @derives: CCF_ART2489
+    # @priority: HIGH
+    # Only if useful improvements made
+    rule_oblig_pay_improvements = useful_improvements_made(lessor, item, lessee) 
+                                  implies oblig(pay_improvements(lessor, item, lessee))
+
+    # @id: Cláusula Tercera - Pago de Mejoras en Terminación
+    # @derives: CCF_ART2489
+    # @priority: HIGH
+    # Only if termination before compensation
+    rule_oblig_pay_improvements_termination = termination_before_compensation(lessor, item, lessee) 
+                                              implies oblig(pay_improvements_termination(lessor, item, lessee))
+
+    # @id: Cláusula Cuarta - Rescisión por Imposibilidad Prolongada
+    # @derives: CCF_ART2490
+    # @priority: HIGH
+    # Only if impediment prolonged
+    rule_right_impediment_prolonged_rescission = impediment_prolonged(lessor, item, lessee) 
+                                                  implies claim(rescind_impediment_prolonged(lessor, item, lessee))
+
+    # @id: Cláusula Quinta - Rescisión por Imposibilidad Parcial
+    # @derives: CCF_ART2490
+    # @priority: HIGH
+    # Only if impediment partial prolonged
+    rule_right_impediment_partial_rescission = impediment_partial_prolonged(lessor, item, lessee) 
+                                                implies claim(rescind_impediment_partial(lessor, item, lessee))
+
+    # @id: Cláusula Sexta - Rescisión por Falta de Pago
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if non payment rent
+    rule_right_non_payment_rescission = non_payment_rent(lessor, item, lessee) 
+                                         implies claim(rescind_non_payment(lessor, item, lessee))
+
+    # @id: Cláusula Séptima - Rescisión por Uso Inadecuado
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if improper use detected
+    rule_right_improper_use_rescission = improper_use_detected(lessor, item, lessee) 
+                                          implies claim(rescind_improper_use(lessor, item, lessee))
+
+    # @id: Cláusula Octava - Rescisión por Subarriendo No Autorizado
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if unauthorized subletting
+    rule_right_unauthorized_subletting_rescission = unauthorized_subletting(lessor, item, lessee) 
+                                                     implies claim(rescind_unauthorized_subletting(lessor, item, lessee))
+
+    # @id: Cláusula Novena - Rescisión por Daños Graves
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if serious damage attributable
+    rule_right_serious_damage_rescission = serious_damage_attributable(lessor, item, lessee) 
+                                            implies claim(rescind_serious_damage(lessor, item, lessee))
+
+    # @id: Cláusula Décima - Rescisión por Variación de Forma
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if form variation unauthorized
+    rule_right_form_variation_rescission = form_variation_unauthorized(lessor, item, lessee) 
+                                            implies claim(rescind_form_variation(lessor, item, lessee))
+
+    # @id: Cláusula Undécima - Rescisión por Falta de Conservación
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if conservation failure
+    rule_right_conservation_failure_rescission = conservation_failure(lessor, item, lessee) 
+                                                  implies claim(rescind_conservation_failure(lessor, item, lessee))
+
+    # @id: Cláusula Duodécima - Rescisión por Pérdida de la Cosa
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if item loss total or partial
+    rule_right_item_loss_rescission = item_loss_total_partial(lessor, item, lessee) 
+                                       implies claim(rescind_item_loss(lessor, item, lessee))
+
+    # @id: Cláusula Décima Tercera - Rescisión por Vicios Ocultos
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if hidden defects unknown
+    rule_right_hidden_defects_rescission = hidden_defects_unknown(lessor, item, lessee) 
+                                            implies claim(rescind_hidden_defects(lessor, item, lessee))
+
+    # @id: Cláusula Décima Cuarta - Rescisión por Oposición Infundada
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Only if opposition subletting unfounded
+    rule_right_opposition_subletting_rescission = opposition_subletting_unfounded(lessor, item, lessee) 
+                                                   implies claim(rescind_opposition_subletting(lessor, item, lessee))
+
+    # ===== INTERNAL INTERRELATIONSHIPS =====
+    
+    # @id: Expropriation-Improvements Connection
+    # @derives: CCF_ART2489
+    # @priority: HIGH
+    # Logical connection: expropriation triggers improvement compensation
+    rule_expropriation_improvements = expropriation_public_utility(state, item, lessor, lessee) 
+                                     implies (useful_improvements_made(lessor, item, lessee) 
+                                             implies oblig(pay_improvements(lessor, item, lessee)))
+
+    # @id: Impediment Mutual Exclusivity
+    # @derives: CCF_ART2490
+    # @priority: HIGH
+    # Mutual exclusivity: impediment cannot be both prolonged and partial
+    rule_impediment_exclusivity = impediment_prolonged(lessor, item, lessee) 
+                                  implies not(impediment_partial_prolonged(lessor, item, lessee))
+
+    # @id: Breach Alternatives
+    # @derives: CCF_ART2410
+    # @priority: HIGH
+    # Alternative breach grounds: any breach can trigger rescission
+    rule_breach_rescission_alternatives = (non_payment_rent(lessor, item, lessee) or
+                                          improper_use_detected(lessor, item, lessee) or
+                                          unauthorized_subletting(lessor, item, lessee) or
+                                          serious_damage_attributable(lessor, item, lessee) or
+                                          form_variation_unauthorized(lessor, item, lessee) or
+                                          conservation_failure(lessor, item, lessee) or
+                                          item_loss_total_partial(lessor, item, lessee) or
+                                          hidden_defects_unknown(lessor, item, lessee) or
+                                          opposition_subletting_unfounded(lessor, item, lessee))
+                                         implies (claim(rescind_non_payment(lessor, item, lessee)) or
+                                                 claim(rescind_improper_use(lessor, item, lessee)) or
+                                                 claim(rescind_unauthorized_subletting(lessor, item, lessee)) or
+                                                 claim(rescind_serious_damage(lessor, item, lessee)) or
+                                                 claim(rescind_form_variation(lessor, item, lessee)) or
+                                                 claim(rescind_conservation_failure(lessor, item, lessee)) or
+                                                 claim(rescind_item_loss(lessor, item, lessee)) or
+                                                 claim(rescind_hidden_defects(lessor, item, lessee)) or
+                                                 claim(rescind_opposition_subletting(lessor, item, lessee)))
+}

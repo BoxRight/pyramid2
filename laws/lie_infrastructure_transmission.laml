@@ -1,0 +1,95 @@
+# /laws/lie_infrastructure_transmission.laml
+
+infrastructure_transmission_law(supplier, user, system) = institution(supplier, user, system) {
+    # Type bindings for specific entities
+    CFE_entity(grid) = Person(grid, legal)
+    CENACE_entity(cenace) = Person(cenace, legal)
+    State_entity(state) = Person(state, legal)
+    Project_entity(project) = Thing(project, movable)
+    
+    # Infrastructure and transmission acts
+    form_infrastructure_association(supplier, project, state) = Person(supplier, legal), Project_entity(project), State_entity(state)
+    celebrate_infrastructure_contract(state, infrastructure, supplier) = State_entity(state), Thing(infrastructure, movable), Person(supplier, legal)
+    interconnect_plants(supplier, project, grid) = Person(supplier, legal), Project_entity(project), CFE_entity(grid)
+    connect_load_centers(supplier, project, grid) = Person(supplier, legal), Project_entity(project), CFE_entity(grid)
+    celebrate_cenace_agreement(supplier, project, cenace) = Person(supplier, legal), Project_entity(project), CENACE_entity(cenace)
+    contribute_infrastructure_works(supplier, project, grid) = Person(supplier, legal), Project_entity(project), CFE_entity(grid)
+    group_beneficiaries(supplier, project, state) = Person(supplier, legal), Project_entity(project), State_entity(state)
+    determine_associations(state, project, supplier) = State_entity(state), Project_entity(project), Person(supplier, legal)
+    call_competitive_bidding(state, project, supplier) = State_entity(state), Project_entity(project), Person(supplier, legal)
+    
+    # Conditional predicates
+    interconnection_requested(supplier, project, grid) = Person(supplier, legal), Project_entity(project), CFE_entity(grid)
+    technical_feasibility_confirmed(supplier, project, grid) = Person(supplier, legal), Project_entity(project), CFE_entity(grid)
+    works_not_included_programs(supplier, project) = Person(supplier, legal), Project_entity(project)
+    contract_determination_required(state, project, supplier) = State_entity(state), Project_entity(project), Person(supplier, legal)
+
+    # @id: Cláusula Primera - Asociaciones de Infraestructura (Condicional)
+    # @derives: LIE_ART30
+    # @priority: HIGH
+    # Only if interconnection requested AND technical feasibility confirmed
+    rule_right_form_association = (interconnection_requested(supplier, project, grid) and 
+                                  technical_feasibility_confirmed(supplier, project, grid)) 
+                                  implies claim(form_infrastructure_association(supplier, project, state))
+
+    # @id: Cláusula Segunda - Contratos de Infraestructura (Condicional)
+    # @derives: LIE_ART30
+    # @priority: HIGH
+    # Only if interconnection requested AND technical feasibility confirmed
+    rule_right_infrastructure_contract = (interconnection_requested(supplier, project, grid) and 
+                                          technical_feasibility_confirmed(supplier, project, grid)) 
+                                          implies claim(celebrate_infrastructure_contract(state, infrastructure, supplier))
+
+    # @id: Cláusula Tercera - Interconexión de Plantas (Condicional)
+    # @derives: LIE_ART33
+    # @priority: HIGH
+    # Only if interconnection requested AND technical feasibility confirmed
+    rule_oblig_interconnect_plants = (interconnection_requested(supplier, project, grid) and 
+                                       technical_feasibility_confirmed(supplier, project, grid)) 
+                                       implies oblig(interconnect_plants(supplier, project, grid))
+
+    # @id: Cláusula Cuarta - Conexión de Centros de Carga (Condicional)
+    # @derives: LIE_ART33
+    # @priority: HIGH
+    # Only if interconnection requested AND technical feasibility confirmed
+    rule_oblig_connect_centers = (interconnection_requested(supplier, project, grid) and 
+                                   technical_feasibility_confirmed(supplier, project, grid)) 
+                                   implies oblig(connect_load_centers(supplier, project, grid))
+
+    # @id: Cláusula Quinta - Acuerdos con CENACE (Condicional)
+    # @derives: LIE_ART33
+    # @priority: HIGH
+    # Only if interconnection requested AND technical feasibility confirmed
+    rule_oblig_cenace_agreement = (interconnection_requested(supplier, project, grid) and 
+                                    technical_feasibility_confirmed(supplier, project, grid)) 
+                                    implies oblig(celebrate_cenace_agreement(supplier, project, cenace))
+
+    # @id: Cláusula Sexta - Aportaciones de Obras de Infraestructura (Condicional)
+    # @derives: LIE_ART35
+    # @priority: MEDIUM
+    # Only if works not included in programs AND interconnection requested
+    rule_right_contribute_works = (works_not_included_programs(supplier, project) and 
+                                    interconnection_requested(supplier, project, grid)) 
+                                    implies claim(contribute_infrastructure_works(supplier, project, grid))
+
+    # @id: Cláusula Séptima - Agrupación de Beneficiarios (Condicional)
+    # @derives: LIE_ART30
+    # @priority: MEDIUM
+    # Only if contract determination required
+    rule_right_group_beneficiaries = contract_determination_required(state, project, supplier) 
+                                     implies claim(group_beneficiaries(supplier, project, state))
+
+    # @id: Cláusula Octava - Determinación de Asociaciones (Condicional)
+    # @derives: LIE_ART31
+    # @priority: MEDIUM
+    # Only if contract determination required
+    rule_right_determine_associations = contract_determination_required(state, project, supplier) 
+                                        implies claim(determine_associations(state, project, supplier))
+
+    # @id: Cláusula Novena - Llamados a Licitación (Condicional)
+    # @derives: LIE_ART32
+    # @priority: MEDIUM
+    # Only if contract determination required
+    rule_oblig_competitive_bidding = contract_determination_required(state, project, supplier) 
+                                      implies oblig(call_competitive_bidding(state, project, supplier))
+}

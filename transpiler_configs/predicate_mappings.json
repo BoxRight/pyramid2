@@ -1,0 +1,35 @@
+{
+  "mexican_lease": {
+    "pay_rent": "pagar la renta",
+    "grant_use": "otorgar el uso",
+    "maintain_system": "mantener el sistema",
+    "return_system": "devolver el sistema",
+    "guarantee_peaceful_use": "garantizar el uso pacífico",
+    "deliver_system": "entregar el sistema",
+    "get_representation_permit": "obtener el permiso de representación",
+    "interconnect": "interconectar",
+    "sell_surplus": "vender excedentes"
+  },
+  "us_lease": {
+    "pay_rent": "pay rent",
+    "grant_use": "grant use",
+    "maintain_system": "maintain system",
+    "return_system": "return system",
+    "guarantee_peaceful_use": "guarantee peaceful use",
+    "deliver_system": "deliver system",
+    "get_representation_permit": "obtain representation permit",
+    "interconnect": "interconnect",
+    "sell_surplus": "sell surplus"
+  },
+  "eu_lease": {
+    "pay_rent": "pay rent",
+    "grant_use": "grant use",
+    "maintain_system": "maintain system",
+    "return_system": "return system",
+    "guarantee_peaceful_use": "guarantee peaceful use",
+    "deliver_system": "deliver system",
+    "get_representation_permit": "obtain representation permit",
+    "interconnect": "interconnect",
+    "sell_surplus": "sell surplus"
+  }
+}

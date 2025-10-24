@@ -1,0 +1,13 @@
+# @id: Principio de Rescisión
+# @derives: CCF_ART2489
+# @priority: HIGH
+#
+# Example: If Lessee fails to pay (BreachFact), the Lessor's
+# 'grant_use' (CounterObligation) becomes 'forbid'.
+
+principle rescission(BreachFact, CounterObligation) {
+    # The rule states that the breach implies a prohibition
+    # on the counter-obligation, effectively nullifying it.
+    rule_remedy = BreachFact implies forbid(CounterObligation)
+}
+

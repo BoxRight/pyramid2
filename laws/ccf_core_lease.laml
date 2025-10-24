@@ -1,0 +1,75 @@
+# /laws/ccf_core_lease.laml
+import "../principles/reciprocity.laml"
+
+core_lease_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+
+    # Core lease acts
+    grant_use(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    pay_rent(lessee, rent, lessor)  = Lessee(lessee), Rent(rent), Lessor(lessor)
+    establish_lease_contract(lessor, lessee, item, rent) = Lessor(lessor), Lessee(lessee), Item(item), Rent(rent)
+    set_rent_price(lessor, rent, lessee) = Lessor(lessor), Rent(rent), Lessee(lessee)
+    limit_lease_duration(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    grant_written_contract(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    maintain_contract_survival(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    maintain_property_transfer(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # Core conditional predicates
+    mutual_agreement(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+    industrial_property(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+    written_contract_required(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+    death_occurred(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+    property_transferred(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+
+    # @id: Cláusula Primera - Objeto del Contrato
+    # @derives: CCF_ART2398
+    # @priority: HIGH
+    apply reciprocity(grant_use(lessor, item, lessee), 
+                      pay_rent(lessee, rent, lessor))
+
+    # @id: Cláusula Segunda - Definición de Arrendamiento (Condicional)
+    # @derives: CCF_ART2398
+    # @priority: HIGH
+    # Only if mutual agreement exists
+    rule_oblig_establish_lease = mutual_agreement(lessor, lessee, item) 
+                                 implies oblig(establish_lease_contract(lessor, lessee, item, rent))
+
+    # @id: Cláusula Tercera - Forma de la Renta (Condicional)
+    # @derives: CCF_ART2399
+    # @priority: HIGH
+    # Only if lease contract established
+    rule_right_set_rent = mutual_agreement(lessor, lessee, item) 
+                          implies claim(set_rent_price(lessor, rent, lessee))
+
+    # @id: Cláusula Cuarta - Límite de Duración Industrial (Condicional)
+    # @derives: CCF_ART2398
+    # @priority: MEDIUM
+    # Only if industrial property
+    rule_prohibit_long_duration = industrial_property(lessor, lessee, item) 
+                                  implies forbid(limit_lease_duration(lessor, item, lessee))
+
+    # @id: Cláusula Quinta - Formalidad Escrita (Condicional)
+    # @derives: CCF_ART2406
+    # @priority: HIGH
+    # Only if written contract required
+    rule_oblig_written_contract = written_contract_required(lessor, lessee, item) 
+                                  implies oblig(grant_written_contract(lessor, item, lessee))
+
+    # @id: Cláusula Sexta - Supervivencia por Muerte (Condicional)
+    # @derives: CCF_ART2408
+    # @priority: HIGH
+    # Only if death occurred
+    rule_oblig_contract_survival = death_occurred(lessor, lessee, item) 
+                                   implies oblig(maintain_contract_survival(lessor, item, lessee))
+
+    # @id: Cláusula Séptima - Subsistencia por Transmisión (Condicional)
+    # @derives: CCF_ART2409
+    # @priority: HIGH
+    # Only if property transferred
+    rule_oblig_property_transfer = property_transferred(lessor, lessee, item) 
+                                   implies oblig(maintain_property_transfer(lessor, item, lessee))
+}

@@ -1,0 +1,78 @@
+# /laws/ccf_lease_liability.laml
+
+lease_liability_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+
+    # Fire and liability acts
+    respond_fire_responsibility(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    exempt_communicated_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    respond_proportional_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    respond_unique_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    prove_fire_origin(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    respond_third_party_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    exclude_third_party_liability(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # Conditional predicates
+    fire_occurred_leased_item(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    fire_communicated_other_part(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    precautions_taken_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    multiple_lessees_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    fire_origin_unknown(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    fire_origin_known(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    fire_origin_proven(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    third_party_damages_fire(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    third_party_via_facto(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+
+    # @id: Cláusula Primera - Responsabilidad por Incendio
+    # @derives: CCF_ART2435
+    # @priority: HIGH
+    # Only if fire occurred leased item
+    rule_oblig_fire_responsibility = fire_occurred_leased_item(lessor, item, lessee) 
+                                    implies oblig(respond_fire_responsibility(lessor, item, lessee))
+
+    # @id: Cláusula Segunda - Exención por Comunicación de Incendio
+    # @derives: CCF_ART2436
+    # @priority: HIGH
+    # Only if fire communicated other part
+    rule_right_exempt_communicated_fire = fire_communicated_other_part(lessee, item, lessor) 
+                                          implies claim(exempt_communicated_fire(lessor, item, lessee))
+
+    # @id: Cláusula Tercera - Responsabilidad Proporcional por Incendio
+    # @derives: CCF_ART2437
+    # @priority: HIGH
+    # Only if multiple lessees fire
+    rule_oblig_proportional_fire = multiple_lessees_fire(lessor, item, lessee) 
+                                    implies oblig(respond_proportional_fire(lessor, item, lessee))
+
+    # @id: Cláusula Cuarta - Responsabilidad Única por Incendio
+    # @derives: CCF_ART2437
+    # @priority: HIGH
+    # Only if fire origin unknown
+    rule_oblig_unique_fire = fire_origin_unknown(lessor, item, lessee) 
+                             implies oblig(respond_unique_fire(lessor, item, lessee))
+
+    # @id: Cláusula Quinta - Prueba del Origen del Incendio
+    # @derives: CCF_ART2438
+    # @priority: HIGH
+    # Only if fire origin known
+    rule_oblig_prove_fire_origin = fire_origin_known(lessor, item, lessee) 
+                                   implies oblig(prove_fire_origin(lessor, item, lessee))
+
+    # @id: Cláusula Sexta - Responsabilidad por Incendio de Terceros
+    # @derives: CCF_ART2439
+    # @priority: HIGH
+    # Only if third party damages fire
+    rule_oblig_third_party_fire = third_party_damages_fire(lessor, item, lessee) 
+                                  implies oblig(respond_third_party_fire(lessor, item, lessee))
+
+    # @id: Cláusula Séptima - Exclusión de Responsabilidad de Terceros
+    # @derives: CCF_ART2439
+    # @priority: HIGH
+    # Only if third party via facto
+    rule_right_exclude_third_party = third_party_via_facto(lessor, item, lessee) 
+                                     implies claim(exclude_third_party_liability(lessor, item, lessee))
+}

@@ -1,0 +1,56 @@
+{
+  "mexican_lease": {
+    "contract_structure": {
+      "header": "{title}\n\nNormativa: {legal_references}\n\nSupuesto: {subject}",
+      "preamble": "CONTRATO DE ARRENDAMIENTO QUE CONSTITUYEN {lessor}, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ \"EL ARRENDADOR\" A FAVOR DE {lessee}, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ \"EL ARRENDATARIO\" SUJETÁNDOSE PARA ELLO LA TENOR DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:",
+      "declarations": "DECLARACIONES",
+      "clauses": "CLÁUSULAS",
+      "signatures": "Así convenido y sabedores del valor, fuerza y alcance legales del contenido de este contrato, las partes lo firman por duplicado a los _____ días del mes de _____.\n\nEL ARRENDADOR\n\nEL ARRENDATARIO"
+    },
+    "clause_templates": {
+      "rule_clause": "Cláusula {number}.- {title}.- {description}",
+      "dependency_explanation": "Cláusula {number}.- {title}.- {description}",
+      "standard_clause": "Cláusula {number}.- {title}.- {description}"
+    },
+    "declaration_templates": {
+      "person_declaration": "Declara ser persona física/moral con capacidad legal para contratar y obligarse en el presente contrato.",
+      "capacity_declaration": "Que cuenta con la capacidad legal y económica para la celebración de este contrato."
+    }
+  },
+  "us_lease": {
+    "contract_structure": {
+      "header": "{title}\n\nLegal References: {legal_references}\n\nSubject: {subject}",
+      "preamble": "LEASE AGREEMENT BETWEEN {lessor}, HEREINAFTER REFERRED TO AS \"THE LESSOR\" AND {lessee}, HEREINAFTER REFERRED TO AS \"THE LESSEE\" SUBJECT TO THE FOLLOWING DECLARATIONS AND CLAUSES:",
+      "declarations": "DECLARATIONS",
+      "clauses": "CLAUSES",
+      "signatures": "So agreed and knowing the value, force and legal scope of the content of this contract, the parties sign it in duplicate on the _____ day of the month of _____.\n\nTHE LESSOR\n\nTHE LESSEE"
+    },
+    "clause_templates": {
+      "rule_clause": "Clause {number}.- {title}.- {description}",
+      "dependency_explanation": "Clause {number}.- {title}.- {description}",
+      "standard_clause": "Clause {number}.- {title}.- {description}"
+    },
+    "declaration_templates": {
+      "person_declaration": "Declares to be a natural/legal person with legal capacity to contract and bind in this agreement.",
+      "capacity_declaration": "That has the legal and economic capacity for the execution of this contract."
+    }
+  },
+  "eu_lease": {
+    "contract_structure": {
+      "header": "{title}\n\nLegal References: {legal_references}\n\nSubject: {subject}",
+      "preamble": "LEASE AGREEMENT BETWEEN {lessor}, HEREINAFTER REFERRED TO AS \"THE LESSOR\" AND {lessee}, HEREINAFTER REFERRED TO AS \"THE LESSEE\" SUBJECT TO THE FOLLOWING DECLARATIONS AND CLAUSES:",
+      "declarations": "DECLARATIONS",
+      "clauses": "CLAUSES",
+      "signatures": "So agreed and knowing the value, force and legal scope of the content of this contract, the parties sign it in duplicate on the _____ day of the month of _____.\n\nTHE LESSOR\n\nTHE LESSEE"
+    },
+    "clause_templates": {
+      "rule_clause": "Clause {number}.- {title}.- {description}",
+      "dependency_explanation": "Clause {number}.- {title}.- {description}",
+      "standard_clause": "Clause {number}.- {title}.- {description}"
+    },
+    "declaration_templates": {
+      "person_declaration": "Declares to be a natural/legal person with legal capacity to contract and bind in this agreement.",
+      "capacity_declaration": "That has the legal and economic capacity for the execution of this contract."
+    }
+  }
+}

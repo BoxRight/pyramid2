@@ -1,0 +1,41 @@
+# /laws/ccf_termination_consequences.laml
+
+termination_consequences_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+
+    # Termination consequence acts
+    pay_final_rent(lessee, rent, lessor) = Lessee(lessee), Rent(rent), Lessor(lessor)
+    return_item_original_state(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+
+    # Conditional predicates
+    lease_termination(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+    item_return_required(lessor, lessee, item) = Lessor(lessor), Lessee(lessee), Item(item)
+
+    # @id: Cláusula Primera - Pago de Renta Final
+    # @derives: CCF_ART2431
+    # @priority: HIGH
+    # Only if lease termination
+    rule_oblig_pay_final_rent = lease_termination(lessor, lessee, item) 
+                                implies oblig(pay_final_rent(lessee, rent, lessor))
+
+    # @id: Cláusula Segunda - Devolución en Estado Original
+    # @derives: CCF_ART2432
+    # @priority: HIGH
+    # Only if item return required
+    rule_oblig_return_original_state = item_return_required(lessor, lessee, item) 
+                                        implies oblig(return_item_original_state(lessee, item, lessor))
+
+    # ===== INTERNAL INTERRELATIONSHIPS =====
+    
+    # @id: Termination Concurrent Obligations
+    # @derives: CCF_ART2431-2432
+    # @priority: HIGH
+    # Concurrent termination obligations: both must happen when lease terminates
+    rule_termination_obligations = lease_termination(lessor, lessee, item) 
+                                  implies (oblig(pay_final_rent(lessee, rent, lessor)) and
+                                          oblig(return_item_original_state(lessee, item, lessor)))
+}

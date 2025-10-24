@@ -1,0 +1,1827 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/lie-contract-norms.json",
+    "title": "LIE Contract Norms",
+    "description": "Contract-related norms from the Mexican Electric Industry Law (Ley de la Industria Eléctrica)",
+    
+    "sources": {
+      "LIE": {
+        "tipo": "ley",
+        "nombre": "Ley de la Industria Eléctrica",
+        "autoridad": "Congreso de la Unión",
+        "normas": {
+          "LIE_ART46_PERMISO_SUMINISTRO": {
+            "id": "Artículo 46 - Permiso para prestar Suministro Eléctrico",
+            "estructura": {
+              "condiciones": [],
+              "activo": "contratante",
+              "pasivo": "CRE",
+              "accion": "obtener permiso para prestar Suministro Eléctrico",
+              "deontico": "obligacion",
+              "objeto": "permiso de suministrador"
+            },
+            "derivadaDe": "LIE.art46",
+            "contexto": ["permisos", "suministro_electrico"]
+          },
+  
+          "LIE_ART46_PERMISO_REPRESENTACION": {
+            "id": "Artículo 46 - Permiso para representar Generadores Exentos",
+            "estructura": {
+              "condiciones": [],
+              "activo": "contratante",
+              "pasivo": "CRE",
+              "accion": "obtener permiso para representar Generadores Exentos",
+              "deontico": "obligacion",
+              "objeto": "permiso de suministrador"
+            },
+            "derivadaDe": "LIE.art46",
+            "contexto": ["permisos", "representacion", "generadores_exentos"]
+          },
+  
+          "LIE_ART51_CONTRATO_OBLIGATORIO": {
+            "id": "Artículo 51 - Contrato de suministro obligatorio",
+            "estructura": {
+              "condiciones": ["LIE_ART46_PERMISO_SUMINISTRO", "inicio_suministro_basico_calificado"],
+              "activo": "contratante",
+              "pasivo": "prestador_servicio", 
+              "accion": "celebrar contrato de suministro previo al inicio del servicio",
+              "deontico": "obligacion",
+              "objeto": "contrato de suministro"
+            },
+            "derivadaDe": "LIE.art51",
+            "contexto": ["suministro_electrico", "contratos_obligatorios"]
+          },
+  
+          "LIE_ART30_FORMAR_ASOCIACIONES": {
+            "id": "Artículo 30 - Formar asociaciones para infraestructura",
+            "estructura": {
+              "condiciones": [],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "formar asociaciones para infraestructura de transmisión y distribución",
+              "deontico": "derecho",
+              "objeto": "asociación público-privada"
+            },
+            "derivadaDe": "LIE.art30",
+            "contexto": ["asociaciones_publicas", "infraestructura", "transmision", "distribucion"]
+          },
+  
+          "LIE_ART30_CELEBRAR_CONTRATOS": {
+            "id": "Artículo 30 - Celebrar contratos para infraestructura",
+            "estructura": {
+              "condiciones": [],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "celebrar contratos para financiamiento, instalación, mantenimiento, gestión, operación y ampliación de infraestructura de transmisión y distribución",
+              "deontico": "derecho",
+              "objeto": "contrato de infraestructura"
+            },
+            "derivadaDe": "LIE.art30",
+            "contexto": ["contratos_publicos", "infraestructura", "transmision", "distribucion"]
+          },
+  
+          "LIE_ART33_OBLIGACION_INTERCONEXION": {
+            "id": "Artículo 33 - Obligación de interconectar y conectar",
+            "estructura": {
+              "condiciones": ["solicitud_interconexion", "factibilidad_tecnica"],
+              "activo": "prestador_servicio",
+              "pasivo": "contratante",
+              "accion": "interconectar Centrales Eléctricas y conectar Centros de Carga en condiciones no discriminatorias",
+              "deontico": "obligacion",
+              "objeto": "contrato de interconexión"
+            },
+            "derivadaDe": "LIE.art33",
+            "contexto": ["interconexion", "no_discriminacion", "acceso_abierto"]
+          },
+  
+          "LIE_ART52_CONTRATOS_COBERTURA_OBLIGATORIOS": {
+            "id": "Artículo 52 - Contratos de Cobertura obligatorios para Suministradores",
+            "estructura": {
+              "condiciones": ["LIE_ART46_PERMISO_SUMINISTRO"],
+              "activo": "prestador_servicio",
+              "pasivo": "CRE",
+              "accion": "celebrar Contratos de Cobertura Eléctrica según requisitos y montos mínimos establecidos",
+              "deontico": "obligacion",
+              "objeto": "contrato de cobertura eléctrica"
+            },
+            "derivadaDe": "LIE.art52",
+            "contexto": ["contratos_cobertura", "requisitos_minimos", "energia_productos"]
+          },
+  
+          "LIE_ART53_SUBASTAS_COBERTURA": {
+            "id": "Artículo 53 - Subastas para Contratos de Cobertura",
+            "estructura": {
+              "condiciones": ["LIE_ART46_PERMISO_SUMINISTRO"],
+              "activo": "prestador_servicio",
+              "pasivo": "CENACE",
+              "accion": "celebrar Contratos de Cobertura Eléctrica a través de subastas",
+              "deontico": "derecho",
+              "objeto": "contrato de cobertura por subasta"
+            },
+            "derivadaDe": "LIE.art53",
+            "contexto": ["subastas", "contratos_cobertura", "servicios_basicos"]
+          },
+  
+          "LIE_ART97_CONTRATOS_COBERTURA_MERCADO": {
+            "id": "Artículo 97 - Contratos de Cobertura entre participantes del mercado",
+            "estructura": {
+              "condiciones": ["participante_mercado_registrado"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "celebrar Contratos de Cobertura Eléctrica para energía, potencia, servicios conexos y derechos financieros",
+              "deontico": "derecho",
+              "objeto": "contrato de cobertura eléctrica"
+            },
+            "derivadaDe": "LIE.art97",
+            "contexto": ["mercado_mayorista", "contratos_cobertura", "energia_potencia"]
+          },
+  
+          "LIE_ART97_CONTRATOS_CERTIFICADOS_LIMPIOS": {
+            "id": "Artículo 97 - Contratos para Certificados de Energías Limpias",
+            "estructura": {
+              "condiciones": ["participante_mercado_registrado"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "celebrar Contratos de Cobertura Eléctrica para adquirir Certificados de Energías Limpias",
+              "deontico": "derecho",
+              "objeto": "certificados de energías limpias"
+            },
+            "derivadaDe": "LIE.art97",
+            "contexto": ["energia_limpia", "certificados", "contratos_cobertura"]
+          },
+  
+          "LIE_ART74_NEGOCIACION_TERRENOS": {
+            "id": "Artículo 74 - Negociación de contratos de uso superficial",
+            "estructura": {
+              "condiciones": ["proyecto_industria_electrica"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "negociar y acordar contraprestación, términos y condiciones para uso, goce o afectación de terrenos",
+              "deontico": "obligacion",
+              "objeto": "contrato de uso superficial"
+            },
+            "derivadaDe": "LIE.art74",
+            "contexto": ["uso_superficial", "negociacion", "transparencia"]
+          },
+  
+          "LIE_ART38_CONVENIOS_CENACE": {
+            "id": "Artículo 38 - Convenios con CENACE para servicios",
+            "estructura": {
+              "condiciones": ["LIE_ART33_OBLIGACION_INTERCONEXION"],
+              "activo": "prestador_servicio",
+              "pasivo": "CENACE",
+              "accion": "celebrar convenios que rigen prestación y facturación de servicios de transmisión y distribución",
+              "deontico": "obligacion",
+              "objeto": "convenio de servicios"
+            },
+            "derivadaDe": "LIE.art38",
+            "contexto": ["transmision", "distribucion", "facturacion", "CENACE"]
+          },
+  
+          "LIE_ART98_CONTRATO_PARTICIPANTE_MERCADO": {
+            "id": "Artículo 98 - Contrato de Participante del Mercado",
+            "estructura": {
+              "condiciones": ["capacidad_participacion_mercado"],
+              "activo": "contratante",
+              "pasivo": "CENACE",
+              "accion": "celebrar contrato de Participante del Mercado para participar en Mercado Eléctrico Mayorista",
+              "deontico": "obligacion",
+              "objeto": "contrato de participante"
+            },
+            "derivadaDe": "LIE.art98",
+            "contexto": ["mercado_mayorista", "participacion", "garantias"]
+          },
+  
+          "LIE_ART35_APORTACIONES_INFRAESTRUCTURA": {
+            "id": "Artículo 35 - Aportaciones para obras de infraestructura",
+            "estructura": {
+              "condiciones": ["obras_no_incluidas_programas", "solicitud_interconexion"],
+              "activo": "contratante",
+              "pasivo": "prestador_servicio",
+              "accion": "realizar aportaciones para construcción de obras, ampliaciones y modificaciones de transmisión y distribución",
+              "deontico": "derecho",
+              "objeto": "contrato de aportaciones"
+            },
+            "derivadaDe": "LIE.art35",
+            "contexto": ["infraestructura", "aportaciones", "costos_compartidos"]
+          },
+  
+          "LIE_ART35_AGRUPACION_BENEFICIARIOS": {
+            "id": "Artículo 35 - Agrupación para obras de infraestructura",
+            "estructura": {
+              "condiciones": ["obras_no_incluidas_programas"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "agruparse para realizar obras de infraestructura a su costa y beneficiarse de las mismas",
+              "deontico": "derecho",
+              "objeto": "acuerdo de agrupación"
+            },
+            "derivadaDe": "LIE.art35",
+            "contexto": ["infraestructura", "agrupacion", "beneficio_mutuo"]
+          },
+  
+          "LIE_ART31_DETERMINACION_CONTRATOS": {
+            "id": "Artículo 31 - Determinación de contratos por la Secretaría",
+            "estructura": {
+              "condiciones": ["incumplimiento_prestador_servicio"],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "determinar formación de asociaciones o celebración de contratos para infraestructura de transmisión y distribución",
+              "deontico": "derecho",
+              "objeto": "contrato de infraestructura forzosa"
+            },
+            "derivadaDe": "LIE.art31",
+            "contexto": ["incumplimiento", "intervencion_estatal", "infraestructura"]
+          },
+  
+          "LIE_ART18_CONTRATOS_INTERCONEXION_GENERADORES": {
+            "id": "Artículo 18 - Contratos de interconexión para generadores",
+            "estructura": {
+              "condiciones": ["LIE_ART33_OBLIGACION_INTERCONEXION"],
+              "activo": "contratante",
+              "pasivo": "prestador_servicio",
+              "accion": "celebrar contratos de interconexión para Centrales Eléctricas al Sistema Eléctrico Nacional",
+              "deontico": "obligacion",
+              "objeto": "contrato de interconexión"
+            },
+            "derivadaDe": "LIE.art18",
+            "contexto": ["generacion", "interconexion", "sistema_electrico"]
+          },
+  
+          "LIE_ART20_VENTAS_GENERADORES_EXENTOS": {
+            "id": "Artículo 20 - Ventas de Generadores Exentos a través de Suministradores",
+            "estructura": {
+              "condiciones": ["generador_exento"],
+              "activo": "contratante",
+              "pasivo": "prestador_servicio",
+              "accion": "vender energía eléctrica y Productos Asociados únicamente a través de Suministrador",
+              "deontico": "obligacion",
+              "objeto": "contrato de venta energía"
+            },
+            "derivadaDe": "LIE.art20",
+            "contexto": ["generadores_exentos", "venta_energia", "intermediacion"]
+          },
+  
+          "LIE_ART21_CONTRATOS_GENERADORES_EXENTOS_BASICOS": {
+            "id": "Artículo 21 - Contratos de Generadores Exentos con Suministradores Básicos",
+            "estructura": {
+              "condiciones": ["LIE_ART20_VENTAS_GENERADORES_EXENTOS"],
+              "activo": "contratante",
+              "pasivo": "prestador_servicio",
+              "accion": "vender energía eléctrica y Productos Asociados a Suministradores de Servicios Básicos",
+              "deontico": "derecho",
+              "objeto": "contrato de compraventa energía"
+            },
+            "derivadaDe": "LIE.art21",
+            "contexto": ["generadores_exentos", "servicios_basicos", "compraventa"]
+          },
+  
+          "LIE_ART32_CONVOCATORIA_CONTRATOS": {
+            "id": "Artículo 32 - Convocatoria a procesos competitivos",
+            "estructura": {
+              "condiciones": ["LIE_ART31_DETERMINACION_CONTRATOS"],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "convocar a particulares para celebración de asociaciones o contratos mediante procesos competitivos",
+              "deontico": "obligacion",
+              "objeto": "proceso competitivo"
+            },
+            "derivadaDe": "LIE.art32",
+            "contexto": ["procesos_competitivos", "convocatoria", "supervision"]
+          },
+  
+          "LIE_ART49_CONTRATOS_DEMANDA_CONTROLABLE": {
+            "id": "Artículo 49 - Contratos para Demanda Controlable",
+            "estructura": {
+              "condiciones": ["usuario_suministro_basico_demanda_controlable"],
+              "activo": "contratante",
+              "pasivo": "prestador_servicio",
+              "accion": "ofrecer reducción de demanda y Productos Asociados a través de Suministrador de Servicios Básicos",
+              "deontico": "derecho",
+              "objeto": "contrato de demanda controlable"
+            },
+            "derivadaDe": "LIE.art49",
+            "contexto": ["demanda_controlable", "servicios_basicos", "reduccion_demanda"]
+          },
+  
+          "LIE_ART48_OBLIGACION_OFRECER_SUMINISTRO": {
+            "id": "Artículo 48 - Obligación de ofrecer Suministro Básico",
+            "estructura": {
+              "condiciones": ["LIE_ART46_PERMISO_SUMINISTRO", "no_usuario_calificado"],
+              "activo": "prestador_servicio",
+              "pasivo": "contratante",
+              "accion": "ofrecer Suministro Básico a todas las personas que lo soliciten en condiciones no discriminatorias",
+              "deontico": "obligacion",
+              "objeto": "oferta de suministro"
+            },
+            "derivadaDe": "LIE.art48",
+            "contexto": ["suministro_basico", "no_discriminacion", "servicio_universal"]
+          }
+        }
+      },
+  
+      "CCF": {
+        "tipo": "codigo",
+        "nombre": "Código Civil Federal",
+        "autoridad": "Congreso de la Unión",
+        "normas": {
+          "CCF_ART2398_DEFINICION_ARRENDAMIENTO": {
+            "id": "Artículo 2398 - Definición de arrendamiento",
+            "estructura": {
+              "condiciones": ["acuerdo_reciproco_partes"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "obligarse recíprocamente una parte a conceder uso o goce temporal de una cosa y otra a pagar precio cierto",
+              "deontico": "obligacion",
+              "objeto": "contrato_arrendamiento"
+            },
+            "derivadaDe": "CCF.art2398.I",
+            "contexto": ["arrendamiento", "uso_temporal", "precio_cierto"]
+          },
+  
+          "CCF_ART2398_LIMITE_INDUSTRIA": {
+            "id": "Artículo 2398 - Límite temporal para fincas industriales",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "finca_destinada_industria"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "limitar duración del arrendamiento a máximo veinte años para fincas destinadas al comercio o industria",
+              "deontico": "prohibicion",
+              "objeto": "duracion_arrendamiento_industrial"
+            },
+            "derivadaDe": "CCF.CCF_ART2398_DEFINICION_ARRENDAMIENTO",
+            "contexto": ["limite_temporal", "industria", "comercio"]
+          },
+  
+          "CCF_ART2399_RENTA_PRECIO": {
+            "id": "Artículo 2399 - Forma de la renta o precio",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "pactar renta o precio en suma de dinero o cualquier cosa equivalente que sea cierta y determinada",
+              "deontico": "derecho",
+              "objeto": "forma_precio_arrendamiento"
+            },
+            "derivadaDe": "CCF.CCF_ART2398_DEFINICION_ARRENDAMIENTO",
+            "contexto": ["precio", "renta", "equivalente_monetario"]
+          },
+  
+          "CCF_ART2400_BIENES_ARRENDABLES": {
+            "id": "Artículo 2400 - Bienes susceptibles de arrendamiento",
+            "estructura": {
+              "condiciones": ["bien_usable_sin_consumirse"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "arrendar todos los bienes que pueden usarse sin consumirse, excepto los prohibidos por ley y derechos estrictamente personales",
+              "deontico": "derecho",
+              "objeto": "bienes_arrendables"
+            },
+            "derivadaDe": "CCF.art2400",
+            "contexto": ["bienes_arrendables", "uso_sin_consumo", "prohibiciones_legales"]
+          },
+  
+          "CCF_ART2401_ARRENDAMIENTO_NO_PROPIETARIO": {
+            "id": "Artículo 2401 - Arrendamiento por no propietario",
+            "estructura": {
+              "condiciones": ["no_propietario_cosa", "facultad_celebrar_contrato"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "arrendar cosa ajena cuando tenga facultad por autorización del dueño o disposición de ley",
+              "deontico": "derecho",
+              "objeto": "arrendamiento_cosa_ajena"
+            },
+            "derivadaDe": "CCF.art2401",
+            "contexto": ["autorizacion_propietario", "disposicion_legal", "administracion"]
+          },
+  
+          "CCF_ART2402_LIMITES_AUTORIZACION": {
+            "id": "Artículo 2402 - Límites en autorización y administración",
+            "estructura": {
+              "condiciones": ["CCF_ART2401_ARRENDAMIENTO_NO_PROPIETARIO"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "sujetar constitución del arrendamiento a límites fijados en autorización del dueño o por ley para administradores",
+              "deontico": "obligacion",
+              "objeto": "limites_arrendamiento_autorizado"
+            },
+            "derivadaDe": "CCF.art2402",
+            "contexto": ["limites_autorizacion", "administradores_bienes", "facultades_limitadas"]
+          },
+  
+          "CCF_ART2403_PROHIBICION_COPROPIETARIO": {
+            "id": "Artículo 2403 - Prohibición de arrendamiento por copropietario sin consentimiento",
+            "estructura": {
+              "condiciones": ["copropiedad_cosa_indivisa"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "arrendar cosa indivisa sin consentimiento de los otros copropietarios",
+              "deontico": "prohibicion",
+              "objeto": "arrendamiento_cosa_indivisa"
+            },
+            "derivadaDe": "CCF.art2403",
+            "contexto": ["copropiedad", "consentimiento_copropietarios", "cosa_indivisa"]
+          },
+  
+          "CCF_ART2404_PROHIBICION_MAGISTRADOS_JUECES": {
+            "id": "Artículo 2404 - Prohibición a magistrados y jueces",
+            "estructura": {
+              "condiciones": ["cargo_magistrado_juez_empleado_publico", "negocios_donde_intervienen"],
+              "activo": "arrendatario",
+              "pasivo": "Estado",
+              "accion": "tomar en arrendamiento por sí o por interpósita persona bienes que deban arrendarse en negocios donde intervengan",
+              "deontico": "prohibicion",
+              "objeto": "arrendamiento_conflicto_interes"
+            },
+            "derivadaDe": "CCF.art2404",
+            "contexto": ["funcionarios_publicos", "conflicto_interes", "persona_interpuesta"]
+          },
+  
+          "CCF_ART2405_PROHIBICION_FUNCIONARIOS_ESTABLECIMIENTOS": {
+            "id": "Artículo 2405 - Prohibición a encargados de establecimientos públicos",
+            "estructura": {
+              "condiciones": ["cargo_funcionario_establecimiento_publico"],
+              "activo": "contratante",
+              "pasivo": "Estado",
+              "accion": "tomar en arrendamiento bienes que administren en establecimientos públicos",
+              "deontico": "prohibicion",
+              "objeto": "arrendamiento_bienes_administrados"
+            },
+            "derivadaDe": "CCF.art2405",
+            "contexto": ["establecimientos_publicos", "administracion_publica", "conflicto_interes"]
+          },
+  
+          "CCF_ART2406_FORMALIDAD_ESCRITA": {
+            "id": "Artículo 2406 - Formalidad escrita del contrato",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "otorgar contrato de arrendamiento por escrito",
+              "deontico": "obligacion",
+              "objeto": "formalidad_escrita_contrato"
+            },
+            "derivadaDe": "CCF.art2406",
+            "contexto": ["formalidad_escrita", "responsabilidad_arrendador", "requisito_forma"]
+          },
+  
+          "CCF_ART2408_SUPERVIVENCIA_MUERTE": {
+            "id": "Artículo 2408 - Supervivencia del contrato por muerte",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "muerte_arrendador_arrendatario"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "mantener vigencia del arrendamiento sin rescisión por muerte de cualquiera de las partes, salvo convenio contrario",
+              "deontico": "obligacion",
+              "objeto": "continuidad_contrato_muerte"
+            },
+            "derivadaDe": "CCF.art2408",
+            "contexto": ["supervivencia_contrato", "muerte_partes", "continuidad_obligaciones"]
+          },
+  
+          "CCF_ART2409_TRANSMISION_PROPIEDAD": {
+            "id": "Artículo 2409 - Subsistencia por transmisión de propiedad",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "transmision_propiedad_predio"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "mantener subsistencia del arrendamiento en términos del contrato original ante transmisión de propiedad",
+              "deontico": "obligacion",
+              "objeto": "subsistencia_transmision_propiedad"
+            },
+            "derivadaDe": "CCF.art2409",
+            "contexto": ["transmision_propiedad", "subsistencia_contrato", "continuidad"]
+          },
+  
+          "CCF_ART2409_PAGO_NUEVO_PROPIETARIO": {
+            "id": "Artículo 2409 - Obligación de pago al nuevo propietario",
+            "estructura": {
+              "condiciones": ["CCF_ART2409_TRANSMISION_PROPIEDAD", "notificacion_titulo_propiedad"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "pagar renta al nuevo propietario desde notificación del título de propiedad, aun habiendo pagado al anterior",
+              "deontico": "obligacion",
+              "objeto": "pago_nuevo_propietario"
+            },
+            "derivadaDe": "CCF.art2409",
+            "contexto": ["nuevo_propietario", "notificacion", "pago_renta"]
+          },
+  
+          "CCF_ART2410_EXPROPIACION_UTILIDAD_PUBLICA": {
+            "id": "Artículo 2410 - Rescisión por expropiación",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "expropiacion_utilidad_publica"],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "rescindir contrato de arrendamiento por expropiación de utilidad pública con indemnización a ambas partes",
+              "deontico": "derecho",
+              "objeto": "rescision_expropiacion"
+            },
+            "derivadaDe": "CCF.art2410",
+            "contexto": ["expropiacion", "utilidad_publica", "indemnizacion", "rescision"]
+          },
+  
+          "CCF_ART2411_BIENES_PUBLICOS": {
+            "id": "Artículo 2411 - Arrendamientos de bienes públicos",
+            "estructura": {
+              "condiciones": ["bienes_nacionales_municipales_establecimientos"],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "sujetar arrendamientos de bienes públicos a disposiciones del derecho administrativo y supletoriamente al derecho civil",
+              "deontico": "obligacion",
+              "objeto": "arrendamiento_bienes_publicos"
+            },
+            "derivadaDe": "CCF.art2411",
+            "contexto": ["bienes_publicos", "derecho_administrativo", "aplicacion_supletoria"]
+          },
+  
+          "CCF_ART2412_ENTREGA_COSA_ARRENDADA": {
+            "id": "Artículo 2412 Fracción I - Entrega de la cosa arrendada",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "entregar al arrendatario la finca con todas sus pertenencias en estado de servir para uso convenido y en condiciones de higiene y seguridad",
+              "deontico": "obligacion",
+              "objeto": "entrega_cosa_estado_servicio"
+            },
+            "derivadaDe": "CCF.art2412.I",
+            "contexto": ["entrega", "estado_servicio", "higiene", "seguridad"]
+          },
+  
+          "CCF_ART2412_CONSERVACION_REPARACIONES": {
+            "id": "Artículo 2412 Fracción II - Conservación y reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "conservar la cosa arrendada en el mismo estado durante el arrendamiento, haciendo todas las reparaciones necesarias",
+              "deontico": "obligacion",
+              "objeto": "conservacion_reparaciones_necesarias"
+            },
+            "derivadaDe": "CCF.art2412.II",
+            "contexto": ["conservacion", "reparaciones", "mantenimiento"]
+          },
+  
+          "CCF_ART2412_NO_ESTORBAR_USO": {
+            "id": "Artículo 2412 Fracción III - No estorbar el uso",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "abstenerse de estorbar o embarazar el uso de la cosa arrendada, salvo por reparaciones urgentes e indispensables",
+              "deontico": "prohibicion",
+              "objeto": "interferencia_uso_cosa"
+            },
+            "derivadaDe": "CCF.art2412.III",
+            "contexto": ["no_interferencia", "uso_pacifico", "reparaciones_urgentes"]
+          },
+  
+          "CCF_ART2412_GARANTIZAR_USO_PACIFICO": {
+            "id": "Artículo 2412 Fracción IV - Garantía de uso pacífico",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "garantizar el uso o goce pacífico de la cosa por todo el tiempo del contrato",
+              "deontico": "obligacion",
+              "objeto": "garantia_uso_pacifico"
+            },
+            "derivadaDe": "CCF.art2412.IV",
+            "contexto": ["uso_pacifico", "garantia", "duracion_contrato"]
+          },
+  
+          "CCF_ART2412_RESPONSABILIDAD_VICIOS_OCULTOS": {
+            "id": "Artículo 2412 Fracción V - Responsabilidad por vicios ocultos",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "vicios_ocultos_anteriores"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "responder de daños y perjuicios que sufra el arrendatario por defectos o vicios ocultos anteriores al arrendamiento",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_vicios_ocultos"
+            },
+            "derivadaDe": "CCF.art2412.V",
+            "contexto": ["vicios_ocultos", "responsabilidad", "daños_perjuicios"]
+          },
+  
+          "CCF_ART2413_TIEMPO_ENTREGA": {
+            "id": "Artículo 2413 - Tiempo de entrega de la cosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "entregar la cosa en el tiempo convenido, o luego de ser requerido si no hay convenio específico",
+              "deontico": "obligacion",
+              "objeto": "tiempo_entrega_cosa"
+            },
+            "derivadaDe": "CCF.art2413",
+            "contexto": ["tiempo_entrega", "requerimiento", "plazo_convenido"]
+          },
+  
+          "CCF_ART2414_PROHIBICION_MUDAR_FORMA": {
+            "id": "Artículo 2414 - Prohibición de mudar forma durante arrendamiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "mudar la forma de la cosa arrendada o intervenir en su uso legítimo durante el arrendamiento, salvo reparaciones urgentes",
+              "deontico": "prohibicion",
+              "objeto": "modificacion_forma_cosa"
+            },
+            "derivadaDe": "CCF.art2414",
+            "contexto": ["forma_cosa", "uso_legitimo", "no_intervencion"]
+          },
+  
+          "CCF_ART2415_NOTIFICACION_REPARACIONES": {
+            "id": "Artículo 2415 - Obligación de notificar necesidad de reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "necesidad_reparaciones"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "poner en conocimiento del arrendador la necesidad de reparaciones a la brevedad posible",
+              "deontico": "obligacion",
+              "objeto": "notificacion_reparaciones_necesarias"
+            },
+            "derivadaDe": "CCF.art2415",
+            "contexto": ["notificacion", "reparaciones", "brevedad", "responsabilidad_omision"]
+          },
+  
+          "CCF_ART2416_REMEDIOS_INCUMPLIMIENTO_REPARACIONES": {
+            "id": "Artículo 2416 - Remedios por incumplimiento de reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2415_NOTIFICACION_REPARACIONES", "incumplimiento_reparaciones"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "elegir entre rescindir el arrendamiento u ocurrir al juez para estrechar al arrendador al cumplimiento",
+              "deontico": "derecho",
+              "objeto": "remedios_incumplimiento_reparaciones"
+            },
+            "derivadaDe": "CCF.art2416",
+            "contexto": ["rescision", "procedimiento_judicial", "cumplimiento_forzoso"]
+          },
+  
+          "CCF_ART2417_DAÑOS_FALTA_OPORTUNIDAD_REPARACIONES": {
+            "id": "Artículo 2417 - Daños por falta de oportunidad en reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2416_REMEDIOS_INCUMPLIMIENTO_REPARACIONES"],
+              "activo": "juez",
+              "pasivo": "contratante",
+              "accion": "decidir sobre pago de daños y perjuicios al arrendatario por falta de oportunidad en reparaciones",
+              "deontico": "derecho",
+              "objeto": "daños_falta_oportunidad_reparaciones"
+            },
+            "derivadaDe": "CCF.art2417",
+            "contexto": ["daños_perjuicios", "falta_oportunidad", "decision_judicial"]
+          },
+  
+          "CCF_ART2418_VIAS_HECHO_TERCEROS": {
+            "id": "Artículo 2418 - Vías de hecho de terceros",
+            "estructura": {
+              "condiciones": ["CCF_ART2412_GARANTIZAR_USO_PACIFICO", "vias_hecho_terceros_sin_derechos"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "limitar garantía de uso pacífico excluyendo vías de hecho de terceros sin derechos sobre la cosa",
+              "deontico": "obligacion",
+              "objeto": "exclusion_responsabilidad_terceros"
+            },
+            "derivadaDe": "CCF.art2418",
+            "contexto": ["terceros", "vias_hecho", "exclusion_responsabilidad"]
+          },
+  
+          "CCF_ART2419_NOTIFICACION_USURPACION": {
+            "id": "Artículo 2419 - Obligación de notificar usurpación",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "usurpacion_novedad_dañosa"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "poner en conocimiento del propietario toda usurpación o novedad dañosa en la cosa arrendada",
+              "deontico": "obligacion",
+              "objeto": "notificacion_usurpacion_novedad"
+            },
+            "derivadaDe": "CCF.art2419",
+            "contexto": ["usurpacion", "novedad_dañosa", "notificacion_propietario"]
+          },
+  
+          "CCF_ART2420_VENCIMIENTO_JUDICIAL_PARTE": {
+            "id": "Artículo 2420 - Vencimiento judicial sobre parte de la cosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "vencimiento_judicial_parte_cosa"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "reclamar disminución de renta o rescisión del contrato si el arrendador es vencido en juicio sobre parte de la cosa",
+              "deontico": "derecho",
+              "objeto": "remedios_vencimiento_judicial"
+            },
+            "derivadaDe": "CCF.art2420",
+            "contexto": ["vencimiento_judicial", "disminucion_renta", "rescision"]
+          },
+  
+          "CCF_ART2421_RESPONSABILIDAD_VICIOS_IMPIDEN_USO": {
+            "id": "Artículo 2421 - Responsabilidad por vicios que impiden uso",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "vicios_impiden_uso"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "responder de vicios o defectos que impidan el uso, aunque no los conociera o sobrevengan sin culpa del arrendatario",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_vicios_impiden_uso"
+            },
+            "derivadaDe": "CCF.art2421",
+            "contexto": ["vicios_defectos", "impedimento_uso", "responsabilidad_objetiva"]
+          },
+  
+          "CCF_ART2422_DEVOLUCION_SALDO": {
+            "id": "Artículo 2422 - Devolución de saldo al terminar arrendamiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "terminacion_arrendamiento", "saldo_favor_arrendatario"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "devolver inmediatamente saldo a favor del arrendatario al terminar, salvo derechos a ejercitar",
+              "deontico": "obligacion",
+              "objeto": "devolucion_saldo_terminacion"
+            },
+            "derivadaDe": "CCF.art2422",
+            "contexto": ["devolucion_saldo", "terminacion", "deposito_judicial"]
+          },
+
+          "CCF_ART2415_NOTIFICACION_REPARACIONES": {
+            "id": "Artículo 2415 - Obligación de notificar necesidad de reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "necesidad_reparaciones"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "poner en conocimiento del arrendador la necesidad de reparaciones a la brevedad posible",
+              "deontico": "obligacion",
+              "objeto": "notificacion_reparaciones_necesarias"
+            },
+            "derivadaDe": "CCF.art2415",
+            "contexto": ["notificacion", "reparaciones", "brevedad", "responsabilidad_omision"]
+          },
+  
+          "CCF_ART2416_REMEDIOS_INCUMPLIMIENTO_REPARACIONES": {
+            "id": "Artículo 2416 - Remedios por incumplimiento de reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2415_NOTIFICACION_REPARACIONES", "incumplimiento_reparaciones"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "elegir entre rescindir el arrendamiento u ocurrir al juez para estrechar al arrendador al cumplimiento",
+              "deontico": "derecho",
+              "objeto": "remedios_incumplimiento_reparaciones"
+            },
+            "derivadaDe": "CCF.art2416",
+            "contexto": ["rescision", "procedimiento_judicial", "cumplimiento_forzoso"]
+          },
+  
+          "CCF_ART2417_DAÑOS_FALTA_OPORTUNIDAD_REPARACIONES": {
+            "id": "Artículo 2417 - Daños por falta de oportunidad en reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2416_REMEDIOS_INCUMPLIMIENTO_REPARACIONES"],
+              "activo": "juez",
+              "pasivo": "arrendador",
+              "accion": "decidir sobre pago de daños y perjuicios al arrendatario por falta de oportunidad en reparaciones",
+              "deontico": "derecho",
+              "objeto": "daños_falta_oportunidad_reparaciones"
+            },
+            "derivadaDe": "CCF.art2417",
+            "contexto": ["daños_perjuicios", "falta_oportunidad", "decision_judicial"]
+          },
+  
+          "CCF_ART2418_VIAS_HECHO_TERCEROS": {
+            "id": "Artículo 2418 - Vías de hecho de terceros",
+            "estructura": {
+              "condiciones": ["CCF_ART2412_GARANTIZAR_USO_PACIFICO", "vias_hecho_terceros_sin_derechos"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "limitar garantía de uso pacífico excluyendo vías de hecho de terceros sin derechos sobre la cosa",
+              "deontico": "obligacion",
+              "objeto": "exclusion_responsabilidad_terceros"
+            },
+            "derivadaDe": "CCF.art2418",
+            "contexto": ["terceros", "vias_hecho", "exclusion_responsabilidad"]
+          },
+  
+          "CCF_ART2419_NOTIFICACION_USURPACION": {
+            "id": "Artículo 2419 - Obligación de notificar usurpación",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "usurpacion_novedad_dañosa"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "poner en conocimiento del propietario toda usurpación o novedad dañosa en la cosa arrendada",
+              "deontico": "obligacion",
+              "objeto": "notificacion_usurpacion_novedad"
+            },
+            "derivadaDe": "CCF.art2419",
+            "contexto": ["usurpacion", "novedad_dañosa", "notificacion_propietario"]
+          },
+  
+          "CCF_ART2421_RESPONSABILIDAD_VICIOS_IMPIDEN_USO": {
+            "id": "Artículo 2421 - Responsabilidad por vicios que impiden uso",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "vicios_impiden_uso"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "responder de vicios o defectos que impidan el uso, aunque no los conociera o sobrevengan sin culpa del arrendatario",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_vicios_impiden_uso"
+            },
+            "derivadaDe": "CCF.art2421",
+            "contexto": ["vicios_defectos", "impedimento_uso", "responsabilidad_objetiva"]
+          },
+  
+          "CCF_ART2422_DEVOLUCION_SALDO": {
+            "id": "Artículo 2422 - Devolución de saldo al terminar arrendamiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "terminacion_arrendamiento", "saldo_favor_arrendatario"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "devolver inmediatamente saldo a favor del arrendatario al terminar, salvo derechos a ejercitar",
+              "deontico": "obligacion",
+              "objeto": "devolucion_saldo_terminacion"
+            },
+            "derivadaDe": "CCF.art2422",
+            "contexto": ["devolucion_saldo", "terminacion", "deposito_judicial"]
+          },
+  
+          "CCF_ART2423_MEJORAS_AUTORIZADAS": {
+            "id": "Artículo 2423 Fracción I - Pago de mejoras autorizadas",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "autorizacion_mejoras_contrato"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "pagar las mejoras hechas por el arrendatario cuando las autorizó en el contrato o posteriormente y se obligó a pagarlas",
+              "deontico": "obligacion",
+              "objeto": "pago_mejoras_autorizadas"
+            },
+            "derivadaDe": "CCF.art2423.I",
+            "contexto": ["mejoras", "autorizacion", "pago_obligatorio"]
+          },
+  
+          "CCF_ART2423_MEJORAS_UTILES_RESCISION": {
+            "id": "Artículo 2423 Fracción II - Pago de mejoras útiles por rescisión culposa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "mejoras_utiles", "rescision_culpa_arrendador"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "pagar las mejoras útiles hechas por el arrendatario si por culpa del arrendador se rescinde el contrato",
+              "deontico": "obligacion",
+              "objeto": "pago_mejoras_utiles_rescision"
+            },
+            "derivadaDe": "CCF.art2423.II",
+            "contexto": ["mejoras_utiles", "rescision", "culpa_arrendador"]
+          },
+  
+          "CCF_ART2423_MEJORAS_TIEMPO_INDETERMINADO": {
+            "id": "Artículo 2423 Fracción III - Pago de mejoras en arrendamiento por tiempo indeterminado",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "arrendamiento_tiempo_indeterminado", "autorizacion_mejoras", "terminacion_antes_compensacion"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "pagar las mejoras autorizadas cuando da por concluido el arrendamiento antes de que transcurra tiempo necesario para compensar gastos con el uso",
+              "deontico": "obligacion",
+              "objeto": "pago_mejoras_terminacion_anticipada"
+            },
+            "derivadaDe": "CCF.art2423.III",
+            "contexto": ["tiempo_indeterminado", "mejoras_autorizadas", "compensacion_gastos", "terminacion_anticipada"]
+          },
+  
+          "CCF_ART2424_PAGO_OBLIGATORIO_MEJORAS": {
+            "id": "Artículo 2424 - Pago obligatorio de mejoras no obstante estipulación contraria",
+            "estructura": {
+              "condiciones": ["CCF_ART2423_MEJORAS_UTILES_RESCISION", "CCF_ART2423_MEJORAS_TIEMPO_INDETERMINADO"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "pagar las mejoras referidas en fracciones II y III del artículo anterior, no obstante estipulación de que quedasen a beneficio de la cosa",
+              "deontico": "obligacion",
+              "objeto": "pago_mejoras_no_obstante_estipulacion"
+            },
+            "derivadaDe": "CCF.art2424",
+            "contexto": ["mejoras_obligatorias", "estipulacion_contraria", "proteccion_arrendatario"]
+          },
+  
+          "CCF_ART2425_PAGO_RENTA": {
+            "id": "Artículo 2425 Fracción I - Obligación de pagar renta",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "satisfacer la renta en la forma y tiempo convenidos",
+              "deontico": "obligacion",
+              "objeto": "pago_renta_convenida"
+            },
+            "derivadaDe": "CCF.art2425.I",
+            "contexto": ["pago_renta", "forma_tiempo_convenidos"]
+          },
+  
+          "CCF_ART2425_RESPONSABILIDAD_PERJUICIOS": {
+            "id": "Artículo 2425 Fracción II - Responsabilidad por perjuicios a la cosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "responder de perjuicios que la cosa arrendada sufra por su culpa o negligencia, la de familiares, sirvientes o subarrendatarios",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_perjuicios_cosa"
+            },
+            "derivadaDe": "CCF.art2425.II",
+            "contexto": ["responsabilidad", "perjuicios", "culpa_negligencia", "terceros_relacionados"]
+          },
+  
+          "CCF_ART2425_USO_CONFORME_DESTINO": {
+            "id": "Artículo 2425 Fracción III - Uso conforme al destino convenido",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "servirse de la cosa solamente para el uso convenido o conforme a naturaleza y destino de ella",
+              "deontico": "obligacion",
+              "objeto": "uso_conforme_destino"
+            },
+            "derivadaDe": "CCF.art2425.III",
+            "contexto": ["uso_convenido", "naturaleza_destino", "limitacion_uso"]
+          },
+  
+          "CCF_ART2426_PAGO_DESDE_RECEPCION": {
+            "id": "Artículo 2426 - Pago de renta desde recepción de la cosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "recepcion_cosa_arrendada"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "pagar renta solamente desde el día que reciba la cosa arrendada, salvo pacto contrario",
+              "deontico": "obligacion",
+              "objeto": "inicio_obligacion_pago_renta"
+            },
+            "derivadaDe": "CCF.art2426",
+            "contexto": ["inicio_pago", "recepcion_cosa", "pacto_contrario"]
+          },
+  
+          "CCF_ART2427_LUGAR_PAGO_RENTA": {
+            "id": "Artículo 2427 - Lugar de pago de la renta",
+            "estructura": {
+              "condiciones": ["CCF_ART2425_PAGO_RENTA"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "pagar renta en lugar convenido, y a falta de convenio, en casa, habitación o despacho del arrendatario",
+              "deontico": "obligacion",
+              "objeto": "lugar_pago_renta"
+            },
+            "derivadaDe": "CCF.art2427",
+            "contexto": ["lugar_pago", "convenio", "domicilio_arrendatario"]
+          },
+  
+          "CCF_ART2428_DEVOLUCION_SALDO_ARRENDATARIO": {
+            "id": "Artículo 2428 - Devolución de saldo por arrendatario",
+            "estructura": {
+              "condiciones": ["CCF_ART2422_DEVOLUCION_SALDO", "saldo_favor_arrendador"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "devolver inmediatamente saldo a favor del arrendador al terminar arrendamiento, aplicando mismas reglas del artículo 2422",
+              "deontico": "obligacion",
+              "objeto": "devolucion_saldo_arrendatario"
+            },
+            "derivadaDe": "CCF.art2428",
+            "contexto": ["devolucion_saldo", "reciprocidad", "terminacion"]
+          },
+  
+          "CCF_ART2429_RENTA_HASTA_ENTREGA": {
+            "id": "Artículo 2429 - Pago de renta hasta entrega de la cosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "terminacion_arrendamiento"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "pagar renta que se venza hasta el día que entregue la cosa arrendada",
+              "deontico": "obligacion",
+              "objeto": "renta_hasta_entrega"
+            },
+            "derivadaDe": "CCF.art2429",
+            "contexto": ["pago_final", "entrega_cosa", "terminacion"]
+          },
+  
+          "CCF_ART2430_PAGO_FRUTOS_DINERO": {
+            "id": "Artículo 2430 - Pago en dinero por incumplimiento de entrega de frutos",
+            "estructura": {
+              "condiciones": ["CCF_ART2399_RENTA_PRECIO", "pago_renta_frutos", "incumplimiento_entrega_frutos"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "pagar en dinero el mayor precio que tuvieren los frutos dentro del tiempo convenido si no los entrega oportunamente",
+              "deontico": "obligacion",
+              "objeto": "pago_sustituto_frutos"
+            },
+            "derivadaDe": "CCF.art2430",
+            "contexto": ["pago_frutos", "incumplimiento", "mayor_precio", "tiempo_convenido"]
+          },
+  
+          "CCF_ART2431_IMPEDIMENTO_TOTAL_USO": {
+            "id": "Artículo 2431 - Impedimento total del uso por caso fortuito",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "caso_fortuito_fuerza_mayor", "impedimento_total_uso"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "suspender causación de renta mientras dure impedimento total del uso por caso fortuito o fuerza mayor",
+              "deontico": "derecho",
+              "objeto": "suspension_renta_impedimento_total"
+            },
+            "derivadaDe": "CCF.art2431",
+            "contexto": ["caso_fortuito", "fuerza_mayor", "impedimento_total", "suspension_renta"]
+          },
+  
+          "CCF_ART2431_RESCISION_IMPEDIMENTO_PROLONGADO": {
+            "id": "Artículo 2431 - Rescisión por impedimento prolongado",
+            "estructura": {
+              "condiciones": ["CCF_ART2431_IMPEDIMENTO_TOTAL_USO", "impedimento_mas_dos_meses"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "pedir rescisión del contrato si impedimento total dura más de dos meses",
+              "deontico": "derecho",
+              "objeto": "rescision_impedimento_prolongado"
+            },
+            "derivadaDe": "CCF.art2431",
+            "contexto": ["rescision", "impedimento_prolongado", "dos_meses"]
+          },
+  
+          "CCF_ART2432_IMPEDIMENTO_PARCIAL_USO": {
+            "id": "Artículo 2432 - Reducción de renta por impedimento parcial",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "impedimento_parcial_uso"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "pedir reducción parcial de renta a juicio de peritos por impedimento parcial del uso",
+              "deontico": "derecho",
+              "objeto": "reduccion_renta_impedimento_parcial"
+            },
+            "derivadaDe": "CCF.art2432",
+            "contexto": ["impedimento_parcial", "reduccion_renta", "juicio_peritos"]
+          },
+  
+          "CCF_ART2432_RESCISION_IMPEDIMENTO_PARCIAL": {
+            "id": "Artículo 2432 - Rescisión por impedimento parcial prolongado",
+            "estructura": {
+              "condiciones": ["CCF_ART2432_IMPEDIMENTO_PARCIAL_USO", "impedimento_mas_dos_meses"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "optar por rescisión del contrato si impedimento parcial dura más de dos meses",
+              "deontico": "derecho",
+              "objeto": "rescision_impedimento_parcial_prolongado"
+            },
+            "derivadaDe": "CCF.art2432",
+            "contexto": ["rescision", "impedimento_parcial", "dos_meses", "opcion_partes"]
+          },
+  
+          "CCF_ART2433_NO_RENUNCIA_IMPEDIMENTOS": {
+            "id": "Artículo 2433 - No renuncia a derechos por impedimentos",
+            "estructura": {
+              "condiciones": ["CCF_ART2431_IMPEDIMENTO_TOTAL_USO", "CCF_ART2432_IMPEDIMENTO_PARCIAL_USO"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "ejercer derechos por impedimentos de uso sin posibilidad de renuncia contractual",
+              "deontico": "derecho",
+              "objeto": "irrenunciabilidad_derechos_impedimento"
+            },
+            "derivadaDe": "CCF.art2433",
+            "contexto": ["irrenunciabilidad", "derechos_impedimento", "orden_publico"]
+          },
+  
+          "CCF_ART2434_EVICCION_PREDIO": {
+            "id": "Artículo 2434 - Evicción del predio arrendado",
+            "estructura": {
+              "condiciones": ["CCF_ART2431_IMPEDIMENTO_TOTAL_USO", "eviccion_predio"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "aplicar disposiciones del artículo 2431 por evicción del predio",
+              "deontico": "obligacion",
+              "objeto": "eviccion_predio_arrendado"
+            },
+            "derivadaDe": "CCF.art2434",
+            "contexto": ["eviccion", "predio", "aplicacion_2431"]
+          },
+  
+          "CCF_ART2434_MALA_FE_EVICCION": {
+            "id": "Artículo 2434 - Responsabilidad por mala fe en evicción",
+            "estructura": {
+              "condiciones": ["CCF_ART2434_EVICCION_PREDIO", "mala_fe_arrendador"],
+              "activo": "arrendador",
+              "pasivo": "arrendatario",
+              "accion": "responder de daños y perjuicios si procedió con mala fe en evicción del predio",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_mala_fe_eviccion"
+            },
+            "derivadaDe": "CCF.art2434",
+            "contexto": ["mala_fe", "eviccion", "daños_perjuicios"]
+          },
+  
+          "CCF_ART2435_RESPONSABILIDAD_INCENDIO": {
+            "id": "Artículo 2435 - Responsabilidad del arrendatario por incendio",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "incendio_cosa_arrendada"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "responder del incendio, salvo que provenga de caso fortuito, fuerza mayor o vicio de construcción",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_incendio"
+            },
+            "derivadaDe": "CCF.art2435",
+            "contexto": ["responsabilidad", "incendio", "excepciones", "caso_fortuito"]
+          },
+  
+          "CCF_ART2436_INCENDIO_COMUNICADO": {
+            "id": "Artículo 2436 - No responsabilidad por incendio comunicado de otra parte",
+            "estructura": {
+              "condiciones": ["CCF_ART2435_RESPONSABILIDAD_INCENDIO", "incendio_comunicado_otra_parte", "precauciones_tomadas"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "quedar exento de responsabilidad por incendio comunicado de otra parte si tomó precauciones necesarias para evitar propagación",
+              "deontico": "derecho",
+              "objeto": "exencion_incendio_comunicado"
+            },
+            "derivadaDe": "CCF.art2436",
+            "contexto": ["incendio_comunicado", "precauciones", "exencion_responsabilidad"]
+          },
+  
+          "CCF_ART2437_INCENDIO_MULTIPLES_ARRENDATARIOS": {
+            "id": "Artículo 2437 - Responsabilidad proporcional por incendio con múltiples arrendatarios",
+            "estructura": {
+              "condiciones": ["CCF_ART2435_RESPONSABILIDAD_INCENDIO", "multiples_arrendatarios", "origen_incendio_desconocido"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "responder proporcionalmente a la renta que paguen cuando son varios arrendatarios y no se sabe dónde comenzó el incendio",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_proporcional_incendio"
+            },
+            "derivadaDe": "CCF.art2437",
+            "contexto": ["multiples_arrendatarios", "responsabilidad_proporcional", "origen_desconocido"]
+          },
+  
+          "CCF_ART2437_RESPONSABILIDAD_ORIGEN_CONOCIDO": {
+            "id": "Artículo 2437 - Responsabilidad única por origen conocido del incendio",
+            "estructura": {
+              "condiciones": ["CCF_ART2437_INCENDIO_MULTIPLES_ARRENDATARIOS", "origen_incendio_probado"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "ser únicamente responsable si se prueba que el incendio comenzó en su habitación",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_unica_origen_probado"
+            },
+            "derivadaDe": "CCF.art2437",
+            "contexto": ["origen_probado", "responsabilidad_unica", "prueba_inicio"]
+          },
+  
+          "CCF_ART2438_PRUEBA_NO_ORIGEN": {
+            "id": "Artículo 2438 - Liberación por prueba de no origen",
+            "estructura": {
+              "condiciones": ["CCF_ART2437_INCENDIO_MULTIPLES_ARRENDATARIOS", "prueba_no_pudo_comenzar"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "quedar libre de responsabilidad si prueba que el fuego no pudo comenzar en la parte que ocupa",
+              "deontico": "derecho",
+              "objeto": "liberacion_prueba_no_origen"
+            },
+            "derivadaDe": "CCF.art2438",
+            "contexto": ["prueba_negativa", "liberacion_responsabilidad", "no_origen"]
+          },
+  
+          "CCF_ART2439_EXTENSION_RESPONSABILIDAD_INCENDIO": {
+            "id": "Artículo 2439 - Extensión de responsabilidad a terceros afectados",
+            "estructura": {
+              "condiciones": ["CCF_ART2435_RESPONSABILIDAD_INCENDIO", "daños_terceros_incendio"],
+              "activo": "arrendatario",
+              "pasivo": "terceros_afectados",
+              "accion": "responder de daños y perjuicios causados a terceras personas que provengan directamente del incendio",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_terceros_incendio"
+            },
+            "derivadaDe": "CCF.art2439",
+            "contexto": ["responsabilidad_terceros", "daños_directos", "extension_responsabilidad"]
+          },
+  
+          "CCF_ART2440_SEGURO_INDUSTRIA_PELIGROSA": {
+            "id": "Artículo 2440 - Obligación de asegurar por industria peligrosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "industria_peligrosa_establecer"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "asegurar la finca contra riesgo probable que origine el ejercicio de industria peligrosa",
+              "deontico": "obligacion",
+              "objeto": "seguro_industria_peligrosa"
+            },
+            "derivadaDe": "CCF.art2440",
+            "contexto": ["industria_peligrosa", "seguro_obligatorio", "riesgo_probable"]
+          },
+  
+          "CCF_ART2441_PROHIBICION_VARIAR_FORMA": {
+            "id": "Artículo 2441 - Prohibición de variar forma sin consentimiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "variar la forma de la cosa arrendada sin consentimiento expreso del arrendador",
+              "deontico": "prohibicion",
+              "objeto": "variacion_forma_sin_consentimiento"
+            },
+            "derivadaDe": "CCF.art2441",
+            "contexto": ["variacion_forma", "consentimiento_expreso", "prohibicion"]
+          },
+  
+          "CCF_ART2441_RESTITUCION_ESTADO_ORIGINAL": {
+            "id": "Artículo 2441 - Obligación de restituir al estado original",
+            "estructura": {
+              "condiciones": ["CCF_ART2441_PROHIBICION_VARIAR_FORMA", "variacion_sin_consentimiento"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "restablecer la cosa al estado en que la recibió al devolverla y responder de daños y perjuicios",
+              "deontico": "obligacion",
+              "objeto": "restitucion_estado_original"
+            },
+            "derivadaDe": "CCF.art2441",
+            "contexto": ["restitucion", "estado_original", "daños_perjuicios"]
+          },
+  
+          "CCF_ART2442_DEVOLUCION_CONFORME_DESCRIPCION": {
+            "id": "Artículo 2442 - Devolución conforme a descripción expresa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "recepcion_con_descripcion_expresa"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "devolver la finca tal como la recibió según descripción expresa, salvo deterioro por tiempo o causa inevitable",
+              "deontico": "obligacion",
+              "objeto": "devolucion_conforme_descripcion"
+            },
+            "derivadaDe": "CCF.art2442",
+            "contexto": ["descripcion_expresa", "devolucion", "deterioro_inevitable"]
+          },
+  
+          "CCF_ART2443_PRESUNCION_BUEN_ESTADO": {
+            "id": "Artículo 2443 - Presunción de recepción en buen estado",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "recepcion_sin_descripcion"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "presumir que recibió la cosa en buen estado si admitió sin descripción expresa, salvo prueba contraria",
+              "deontico": "obligacion",
+              "objeto": "presuncion_buen_estado_recepcion"
+            },
+            "derivadaDe": "CCF.art2443",
+            "contexto": ["presuncion_legal", "buen_estado", "prueba_contraria"]
+          },
+  
+          "CCF_ART2444_REPARACIONES_DETERIOROS_MENORES": {
+            "id": "Artículo 2444 - Reparaciones de deterioros menores por arrendatario",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "deterioros_poca_importancia"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "hacer reparaciones de deterioros de poca importancia regularmente causados por habitantes del edificio",
+              "deontico": "obligacion",
+              "objeto": "reparaciones_deterioros_menores"
+            },
+            "derivadaDe": "CCF.art2444",
+            "contexto": ["deterioros_menores", "reparaciones_arrendatario", "uso_normal"]
+          },
+  
+          "CCF_ART2445_DERECHOS_PERDIDA_USO_REPARACIONES": {
+            "id": "Artículo 2445 - Derechos por pérdida de uso durante reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "perdida_uso_por_reparaciones"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "no pagar precio del arrendamiento, pedir reducción de precio o rescisión si pérdida de uso por reparaciones",
+              "deontico": "derecho",
+              "objeto": "derechos_perdida_uso_reparaciones"
+            },
+            "derivadaDe": "CCF.art2445",
+            "contexto": ["perdida_uso", "reparaciones", "suspension_pago", "rescision"]
+          },
+  
+          "CCF_ART2446_ARRENDAMIENTOS_DOBLES": {
+            "id": "Artículo 2446 - Prevalencia por fecha en arrendamientos dobles",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "arrendamiento_misma_cosa_varias_personas"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "prevalecer el arrendamiento primero en fecha, o del que tiene la cosa en su poder si no se puede verificar prioridad",
+              "deontico": "derecho",
+              "objeto": "prevalencia_arrendamiento_anterior"
+            },
+            "derivadaDe": "CCF.art2446",
+            "contexto": ["arrendamientos_dobles", "prioridad_fecha", "posesion"]
+          },
+  
+          "CCF_ART2446_REGISTRO_ARRENDAMIENTO": {
+            "id": "Artículo 2446 - Validez por registro de arrendamiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2446_ARRENDAMIENTOS_DOBLES", "arrendamiento_debe_inscribirse"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "validar únicamente el arrendamiento inscrito en el Registro cuando debe ser inscrito",
+              "deontico": "obligacion",
+              "objeto": "validez_arrendamiento_inscrito"
+            },
+            "derivadaDe": "CCF.art2446",
+            "contexto": ["registro_publico", "inscripcion_obligatoria", "validez"]
+          },
+  
+          "CCF_ART2447_DERECHO_PREFERENCIA_VENTA": {
+            "id": "Artículo 2447 - Derecho de preferencia en venta",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "arrendamiento_mas_cinco_años", "mejoras_importancia", "corriente_pago_renta"],
+              "activo": "arrendatario",
+              "pasivo": "arrendador",
+              "accion": "ser preferido en igualdad de condiciones en caso de venta de la finca",
+              "deontico": "derecho",
+              "objeto": "derecho_preferencia_venta"
+            },
+            "derivadaDe": "CCF.art2447",
+            "contexto": ["preferencia_venta", "cinco_años", "mejoras_importancia", "tanto_derecho"]
+          },
+
+          "CCF_ART2404_PROHIBICION_ARRENDAMIENTO_CONFLICTO_INTERES": {
+            "id": "Artículo 2404 - Prohibición de arrendamiento por conflicto de intereses",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "conflicto_interes_funcionarios_establecimientos"],
+              "activo": "funcionario_publico",
+              "pasivo": "Estado",
+              "accion": "tomar en arrendamiento por sí o por interpósita persona bienes que deban arrendarse en negocios donde intervengan",
+              "deontico": "prohibicion",
+              "objeto": "arrendamiento_conflicto_interes"
+            },
+            "derivadaDe": "CCF.art2404",
+            "contexto": ["funcionarios_publicos", "conflicto_interes", "persona_interpuesta"]
+          },
+  
+          "CCF_ART2405_PROHIBICION_FUNCIONARIOS_ESTABLECIMIENTOS": {
+            "id": "Artículo 2405 - Prohibición a encargados de establecimientos públicos",
+            "estructura": {
+              "condiciones": ["cargo_funcionario_establecimiento_publico"],
+              "activo": "contratante",
+              "pasivo": "Estado",
+              "accion": "tomar en arrendamiento bienes que administren en establecimientos públicos",
+              "deontico": "prohibicion",
+              "objeto": "arrendamiento_bienes_administrados"
+            },
+            "derivadaDe": "CCF.art2405",
+            "contexto": ["establecimientos_publicos", "administracion_publica", "conflicto_interes"]
+          },
+  
+          "CCF_ART2406_FORMALIDAD_ESCRITA": {
+            "id": "Artículo 2406 - Formalidad escrita del contrato",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "otorgar contrato de arrendamiento por escrito",
+              "deontico": "obligacion",
+              "objeto": "formalidad_escrita_contrato"
+            },
+            "derivadaDe": "CCF.art2406",
+            "contexto": ["formalidad_escrita", "responsabilidad_arrendador", "requisito_forma"]
+          },
+  
+          "CCF_ART2408_SUPERVIVENCIA_MUERTE": {
+            "id": "Artículo 2408 - Supervivencia del contrato por muerte",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "muerte_arrendador_arrendatario"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "mantener vigencia del arrendamiento sin rescisión por muerte de cualquiera de las partes, salvo convenio contrario",
+              "deontico": "obligacion",
+              "objeto": "continuidad_contrato_muerte"
+            },
+            "derivadaDe": "CCF.art2408",
+            "contexto": ["supervivencia_contrato", "muerte_partes", "continuidad_obligaciones"]
+          },
+  
+          "CCF_ART2409_TRANSMISION_PROPIEDAD": {
+            "id": "Artículo 2409 - Subsistencia por transmisión de propiedad",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "transmision_propiedad_predio"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "mantener subsistencia del arrendamiento en términos del contrato original ante transmisión de propiedad",
+              "deontico": "obligacion",
+              "objeto": "subsistencia_transmision_propiedad"
+            },
+            "derivadaDe": "CCF.art2409",
+            "contexto": ["transmision_propiedad", "subsistencia_contrato", "continuidad"]
+          },
+  
+          "CCF_ART2409_PAGO_NUEVO_PROPIETARIO": {
+            "id": "Artículo 2409 - Obligación de pago al nuevo propietario",
+            "estructura": {
+              "condiciones": ["CCF_ART2409_TRANSMISION_PROPIEDAD", "notificacion_titulo_propiedad"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "pagar renta al nuevo propietario desde notificación del título de propiedad, aun habiendo pagado al anterior",
+              "deontico": "obligacion",
+              "objeto": "pago_nuevo_propietario"
+            },
+            "derivadaDe": "CCF.art2409",
+            "contexto": ["nuevo_propietario", "notificacion", "pago_renta"]
+          },
+  
+          "CCF_ART2410_EXPROPIACION_UTILIDAD_PUBLICA": {
+            "id": "Artículo 2410 - Rescisión por expropiación",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "expropiacion_utilidad_publica"],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "rescindir contrato de arrendamiento por expropiación de utilidad pública con indemnización a ambas partes",
+              "deontico": "derecho",
+              "objeto": "rescision_expropiacion"
+            },
+            "derivadaDe": "CCF.art2410",
+            "contexto": ["expropiacion", "utilidad_publica", "indemnizacion", "rescision"]
+          },
+  
+          "CCF_ART2411_BIENES_PUBLICOS": {
+            "id": "Artículo 2411 - Arrendamientos de bienes públicos",
+            "estructura": {
+              "condiciones": ["bienes_nacionales_municipales_establecimientos"],
+              "activo": "Estado",
+              "pasivo": "contratante",
+              "accion": "sujetar arrendamientos de bienes públicos a disposiciones del derecho administrativo y supletoriamente al derecho civil",
+              "deontico": "obligacion",
+              "objeto": "arrendamiento_bienes_publicos"
+            },
+            "derivadaDe": "CCF.art2411",
+            "contexto": ["bienes_publicos", "derecho_administrativo", "aplicacion_supletoria"]
+          },
+  
+          "CCF_ART2412_ENTREGA_COSA_ARRENDADA": {
+            "id": "Artículo 2412 Fracción I - Entrega de la cosa arrendada",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "entregar al arrendatario la finca con todas sus pertenencias en estado de servir para uso convenido y en condiciones de higiene y seguridad",
+              "deontico": "obligacion",
+              "objeto": "entrega_cosa_estado_servicio"
+            },
+            "derivadaDe": "CCF.art2412.I",
+            "contexto": ["entrega", "estado_servicio", "higiene", "seguridad"]
+          },
+  
+          "CCF_ART2412_CONSERVACION_REPARACIONES": {
+            "id": "Artículo 2412 Fracción II - Conservación y reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "conservar la cosa arrendada en el mismo estado durante el arrendamiento, haciendo todas las reparaciones necesarias",
+              "deontico": "obligacion",
+              "objeto": "conservacion_reparaciones_necesarias"
+            },
+            "derivadaDe": "CCF.art2412.II",
+            "contexto": ["conservacion", "reparaciones", "mantenimiento"]
+          },
+  
+          "CCF_ART2412_NO_ESTORBAR_USO": {
+            "id": "Artículo 2412 Fracción III - No estorbar el uso",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "abstenerse de estorbar o embarazar el uso de la cosa arrendada, salvo por reparaciones urgentes e indispensables",
+              "deontico": "prohibicion",
+              "objeto": "interferencia_uso_cosa"
+            },
+            "derivadaDe": "CCF.art2412.III",
+            "contexto": ["no_interferencia", "uso_pacifico", "reparaciones_urgentes"]
+          },
+  
+          "CCF_ART2412_GARANTIZAR_USO_PACIFICO": {
+            "id": "Artículo 2412 Fracción IV - Garantía de uso pacífico",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "garantizar el uso o goce pacífico de la cosa por todo el tiempo del contrato",
+              "deontico": "obligacion",
+              "objeto": "garantia_uso_pacifico"
+            },
+            "derivadaDe": "CCF.art2412.IV",
+            "contexto": ["uso_pacifico", "garantia", "duracion_contrato"]
+          },
+  
+          "CCF_ART2412_RESPONSABILIDAD_VICIOS_OCULTOS": {
+            "id": "Artículo 2412 Fracción V - Responsabilidad por vicios ocultos",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "vicios_ocultos_anteriores"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "responder de daños y perjuicios que sufra el arrendatario por defectos o vicios ocultos anteriores al arrendamiento",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_vicios_ocultos"
+            },
+            "derivadaDe": "CCF.art2412.V",
+            "contexto": ["vicios_ocultos", "responsabilidad", "daños_perjuicios"]
+          },
+  
+          "CCF_ART2413_TIEMPO_ENTREGA": {
+            "id": "Artículo 2413 - Tiempo de entrega de la cosa",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "entregar la cosa en el tiempo convenido, o luego de ser requerido si no hay convenio específico",
+              "deontico": "obligacion",
+              "objeto": "tiempo_entrega_cosa"
+            },
+            "derivadaDe": "CCF.art2413",
+            "contexto": ["tiempo_entrega", "requerimiento", "plazo_convenido"]
+          },
+  
+          "CCF_ART2414_PROHIBICION_MUDAR_FORMA": {
+            "id": "Artículo 2414 - Prohibición de mudar forma durante arrendamiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "mudar la forma de la cosa arrendada o intervenir en su uso legítimo durante el arrendamiento, salvo reparaciones urgentes",
+              "deontico": "prohibicion",
+              "objeto": "modificacion_forma_cosa"
+            },
+            "derivadaDe": "CCF.art2414",
+            "contexto": ["forma_cosa", "uso_legitimo", "no_intervencion"]
+          },
+  
+          "CCF_ART2415_NOTIFICACION_REPARACIONES": {
+            "id": "Artículo 2415 - Obligación de notificar necesidad de reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "necesidad_reparaciones"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "poner en conocimiento del arrendador la necesidad de reparaciones a la brevedad posible",
+              "deontico": "obligacion",
+              "objeto": "notificacion_reparaciones_necesarias"
+            },
+            "derivadaDe": "CCF.art2415",
+            "contexto": ["notificacion", "reparaciones", "brevedad", "responsabilidad_omision"]
+          },
+  
+          "CCF_ART2416_REMEDIOS_INCUMPLIMIENTO_REPARACIONES": {
+            "id": "Artículo 2416 - Remedios por incumplimiento de reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2415_NOTIFICACION_REPARACIONES", "incumplimiento_reparaciones"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "elegir entre rescindir el arrendamiento u ocurrir al juez para estrechar al arrendador al cumplimiento",
+              "deontico": "derecho",
+              "objeto": "remedios_incumplimiento_reparaciones"
+            },
+            "derivadaDe": "CCF.art2416",
+            "contexto": ["rescision", "procedimiento_judicial", "cumplimiento_forzoso"]
+          },
+  
+          "CCF_ART2417_DAÑOS_FALTA_OPORTUNIDAD_REPARACIONES": {
+            "id": "Artículo 2417 - Daños por falta de oportunidad en reparaciones",
+            "estructura": {
+              "condiciones": ["CCF_ART2416_REMEDIOS_INCUMPLIMIENTO_REPARACIONES"],
+              "activo": "juez",
+              "pasivo": "contratante",
+              "accion": "decidir sobre pago de daños y perjuicios al arrendatario por falta de oportunidad en reparaciones",
+              "deontico": "derecho",
+              "objeto": "daños_falta_oportunidad_reparaciones"
+            },
+            "derivadaDe": "CCF.art2417",
+            "contexto": ["daños_perjuicios", "falta_oportunidad", "decision_judicial"]
+          },
+  
+          "CCF_ART2418_VIAS_HECHO_TERCEROS": {
+            "id": "Artículo 2418 - Vías de hecho de terceros",
+            "estructura": {
+              "condiciones": ["CCF_ART2412_GARANTIZAR_USO_PACIFICO", "vias_hecho_terceros_sin_derechos"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "limitar garantía de uso pacífico excluyendo vías de hecho de terceros sin derechos sobre la cosa",
+              "deontico": "obligacion",
+              "objeto": "exclusion_responsabilidad_terceros"
+            },
+            "derivadaDe": "CCF.art2418",
+            "contexto": ["terceros", "vias_hecho", "exclusion_responsabilidad"]
+          },
+  
+          "CCF_ART2419_NOTIFICACION_USURPACION": {
+            "id": "Artículo 2419 - Obligación de notificar usurpación",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "usurpacion_novedad_dañosa"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "poner en conocimiento del propietario toda usurpación o novedad dañosa en la cosa arrendada",
+              "deontico": "obligacion",
+              "objeto": "notificacion_usurpacion_novedad"
+            },
+            "derivadaDe": "CCF.art2419",
+            "contexto": ["usurpacion", "novedad_dañosa", "notificacion_propietario"]
+          },
+  
+          "CCF_ART2421_RESPONSABILIDAD_VICIOS_IMPIDEN_USO": {
+            "id": "Artículo 2421 - Responsabilidad por vicios que impiden uso",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "vicios_impiden_uso"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "responder de vicios o defectos que impidan el uso, aunque no los conociera o sobrevengan sin culpa del arrendatario",
+              "deontico": "obligacion",
+              "objeto": "responsabilidad_vicios_impiden_uso"
+            },
+            "derivadaDe": "CCF.art2421",
+            "contexto": ["vicios_defectos", "impedimento_uso", "responsabilidad_objetiva"]
+          },
+  
+          "CCF_ART2422_DEVOLUCION_SALDO": {
+            "id": "Artículo 2422 - Devolución de saldo al terminar arrendamiento",
+            "estructura": {
+              "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "terminacion_arrendamiento", "saldo_favor_arrendatario"],
+              "activo": "contratante",
+              "pasivo": "contratante",
+              "accion": "devolver inmediatamente saldo a favor del arrendatario al terminar, salvo derechos a ejercitar",
+              "deontico": "obligacion",
+              "objeto": "devolucion_saldo_terminacion"
+            },
+            "derivadaDe": "CCF.art2422",
+            "contexto": ["devolucion_saldo", "terminacion", "deposito_judicial"]
+          },
+          "CCF_ART2489_RESCISION_FALTA_PAGO": {
+          "id": "Artículo 2489 Fracción I - Rescisión por falta de pago de renta",
+          "estructura": {
+            "condiciones": ["CCF_ART2425_PAGO_RENTA", "incumplimiento_pago_renta"],
+            "activo": "arrendador",
+            "pasivo": "arrendatario",
+            "accion": "exigir rescisión del contrato por falta de pago de renta conforme a términos del artículo 2425 fracción I",
+            "deontico": "derecho",
+            "objeto": "rescision_falta_pago"
+          },
+          "derivadaDe": "CCF.art2489.I",
+          "contexto": ["rescision_arrendador", "falta_pago", "incumplimiento_renta"]
+        },
+
+        "CCF_ART2489_RESCISION_USO_CONTRARIO": {
+          "id": "Artículo 2489 Fracción II - Rescisión por uso contrario al destino",
+          "estructura": {
+            "condiciones": ["CCF_ART2425_USO_CONFORME_DESTINO", "uso_contrario_destino"],
+            "activo": "arrendador",
+            "pasivo": "arrendatario",
+            "accion": "exigir rescisión del contrato por usar la cosa en contravención a lo dispuesto en artículo 2425 fracción III",
+            "deontico": "derecho",
+            "objeto": "rescision_uso_indebido"
+          },
+          "derivadaDe": "CCF.art2489.II",
+          "contexto": ["rescision_arrendador", "uso_indebido", "destino_cosa"]
+        },
+
+        "CCF_ART2489_RESCISION_SUBARRIENDO_ILEGAL": {
+          "id": "Artículo 2489 Fracción III - Rescisión por subarriendo no autorizado",
+          "estructura": {
+            "condiciones": ["subarriendo_sin_autorizacion", "contravention_art_2480"],
+            "activo": "arrendador",
+            "pasivo": "arrendatario",
+            "accion": "exigir rescisión del contrato por subarrendar la cosa en contravención al artículo 2480",
+            "deontico": "derecho",
+            "objeto": "rescision_subarriendo_ilegal"
+          },
+          "derivadaDe": "CCF.art2489.III",
+          "contexto": ["rescision_arrendador", "subarriendo", "autorizacion"]
+        },
+
+        "CCF_ART2489_RESCISION_DAÑOS_GRAVES": {
+          "id": "Artículo 2489 Fracción IV - Rescisión por daños graves imputables",
+          "estructura": {
+            "condiciones": ["CCF_ART2398_DEFINICION_ARRENDAMIENTO", "daños_graves_cosa", "imputabilidad_arrendatario"],
+            "activo": "arrendador",
+            "pasivo": "arrendatario",
+            "accion": "exigir rescisión del contrato por daños graves a la cosa arrendada imputables al arrendatario",
+            "deontico": "derecho",
+            "objeto": "rescision_daños_graves"
+          },
+          "derivadaDe": "CCF.art2489.IV",
+          "contexto": ["rescision_arrendador", "daños_graves", "imputabilidad"]
+        },
+
+        "CCF_ART2489_RESCISION_VARIACION_FORMA": {
+          "id": "Artículo 2489 Fracción V - Rescisión por variación de forma sin consentimiento",
+          "estructura": {
+            "condiciones": ["CCF_ART2441_PROHIBICION_VARIAR_FORMA", "variacion_sin_consentimiento"],
+            "activo": "arrendador",
+            "pasivo": "arrendatario",
+            "accion": "exigir rescisión del contrato por variar forma de la cosa sin consentimiento expreso conforme artículo 2441",
+            "deontico": "derecho",
+            "objeto": "rescision_variacion_forma"
+          },
+          "derivadaDe": "CCF.art2489.V",
+          "contexto": ["rescision_arrendador", "variacion_forma", "consentimiento"]
+        },
+
+        "CCF_ART2490_RESCISION_INCUMPLIMIENTO_CONSERVACION": {
+          "id": "Artículo 2490 Fracción I - Rescisión por incumplimiento de conservación",
+          "estructura": {
+            "condiciones": ["CCF_ART2412_CONSERVACION_REPARACIONES", "incumplimiento_conservacion"],
+            "activo": "arrendatario",
+            "pasivo": "arrendador",
+            "accion": "exigir rescisión del contrato por contravenir obligación de conservación referida en artículo 2412 fracción II",
+            "deontico": "derecho",
+            "objeto": "rescision_incumplimiento_conservacion"
+          },
+          "derivadaDe": "CCF.art2490.I",
+          "contexto": ["rescision_arrendatario", "incumplimiento_conservacion", "reparaciones"]
+        },
+
+        "CCF_ART2490_RESCISION_PERDIDA_COSA": {
+          "id": "Artículo 2490 Fracción II - Rescisión por pérdida total o parcial",
+          "estructura": {
+            "condiciones": ["CCF_ART2431_IMPEDIMENTO_TOTAL_USO", "CCF_ART2434_EVICCION_PREDIO", "CCF_ART2445_DERECHOS_PERDIDA_USO_REPARACIONES", "perdida_total_parcial"],
+            "activo": "arrendatario",
+            "pasivo": "arrendador",
+            "accion": "exigir rescisión del contrato por pérdida total o parcial de la cosa conforme artículos 2431, 2434 y 2445",
+            "deontico": "derecho",
+            "objeto": "rescision_perdida_cosa"
+          },
+          "derivadaDe": "CCF.art2490.II",
+          "contexto": ["rescision_arrendatario", "perdida_cosa", "impedimento_uso"]
+        },
+
+        "CCF_ART2490_RESCISION_VICIOS_OCULTOS": {
+          "id": "Artículo 2490 Fracción III - Rescisión por defectos o vicios ocultos",
+          "estructura": {
+            "condiciones": ["CCF_ART2412_RESPONSABILIDAD_VICIOS_OCULTOS", "defectos_vicios_ocultos", "anteriores_arrendamiento", "desconocidos_arrendatario"],
+            "activo": "arrendatario",
+            "pasivo": "arrendador",
+            "accion": "exigir rescisión del contrato por existencia de defectos o vicios ocultos anteriores al arrendamiento y desconocidos",
+            "deontico": "derecho",
+            "objeto": "rescision_vicios_ocultos"
+          },
+          "derivadaDe": "CCF.art2490.III",
+          "contexto": ["rescision_arrendatario", "vicios_ocultos", "defectos_anteriores"]
+        },
+
+        "CCF_ART2492_RESCISION_OPOSICION_SUBARRIENDO": {
+          "id": "Artículo 2492 - Rescisión por oposición infundada al subarriendo",
+          "estructura": {
+            "condiciones": ["derecho_subarriendo_arrendatario", "oposicion_sin_motivo_fundado"],
+            "activo": "arrendatario",
+            "pasivo": "arrendador",
+            "accion": "pedir rescisión del contrato si arrendador se opone sin motivo fundado al subarriendo que con derecho pretende hacer",
+            "deontico": "derecho",
+            "objeto": "rescision_oposicion_subarriendo"
+          },
+          "derivadaDe": "CCF.art2492",
+          "contexto": ["rescision_arrendatario", "subarriendo", "oposicion_infundada"]
+        },
+
+        "CCF_ART2493_INDEMNIZACION_USUFRUCTUARIO": {
+          "id": "Artículo 2493 - Indemnización por usufructuario que no manifestó su calidad",
+          "estructura": {
+            "condiciones": ["usufructuario_no_manifesto_calidad", "consolidacion_propiedad_usufructo", "exigencia_desocupacion"],
+            "activo": "arrendatario",
+            "pasivo": "arrendador",
+            "accion": "demandar indemnización de daños y perjuicios si usufructuario no manifestó su calidad y propietario exige desocupación",
+            "deontico": "derecho",
+            "objeto": "indemnizacion_usufructuario_oculto"
+          },
+          "derivadaDe": "CCF.art2493",
+          "contexto": ["usufructo", "consolidacion_propiedad", "indemnizacion"]
+        },
+
+        "CCF_ART2495_SUBSISTENCIA_ENAJENACION_JUDICIAL": {
+          "id": "Artículo 2495 - Subsistencia en enajenación judicial",
+          "estructura": {
+            "condiciones": ["enajenacion_judicial_predio", "arrendamiento_previo_secuestro"],
+            "activo": "contratante",
+            "pasivo": "contratante",
+            "accion": "mantener subsistencia del arrendamiento en enajenación judicial, salvo celebración dentro de 60 días anteriores al secuestro",
+            "deontico": "obligacion",
+            "objeto": "subsistencia_enajenacion_judicial"
+          },
+          "derivadaDe": "CCF.art2495",
+          "contexto": ["enajenacion_judicial", "secuestro", "sesenta_dias"]
+        },
+
+        "CCF_ART2495_EXCEPCION_SECUESTRO": {
+          "id": "Artículo 2495 - Excepción por arrendamiento pre-secuestro",
+          "estructura": {
+            "condiciones": ["CCF_ART2495_SUBSISTENCIA_ENAJENACION_JUDICIAL", "arrendamiento_sesenta_dias_antes_secuestro"],
+            "activo": "contratante",
+            "pasivo": "contratante",
+            "accion": "dar por concluido el arrendamiento si se celebró dentro de sesenta días anteriores al secuestro de la finca",
+            "deontico": "derecho",
+            "objeto": "conclusion_arrendamiento_pre_secuestro"
+          },
+          "derivadaDe": "CCF.art2495",
+          "contexto": ["secuestro_finca", "sesenta_dias", "conclusion_contrato"]
+        },
+
+        "CCF_ART2496_REMISION_EXPROPIACION_EJECUCION": {
+          "id": "Artículo 2496 - Remisión a artículos sobre expropiación y ejecución",
+          "estructura": {
+            "condiciones": ["expropiacion_predio", "ejecucion_judicial"],
+            "activo": "contratante",
+            "pasivo": "contratante",
+            "accion": "observar disposiciones de artículos 2456, 2457 y 2458 en casos de expropiación y ejecución judicial",
+            "deontico": "obligacion",
+            "objeto": "remision_expropiacion_ejecucion"
+          },
+          "derivadaDe": "CCF.art2496",
+          "contexto": ["expropiacion", "ejecucion_judicial", "remision_normativa"]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+# /laws/ccf_lease_rights.laml
+
+lease_rights_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+
+    # Lease rights and obligations acts
+    deliver_item(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    maintain_item(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    guarantee_peaceful_use(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    respond_hidden_defects(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    deliver_item_service_ready(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    conserve_item_state(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    avoid_interference(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    deliver_item_timely(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    avoid_modification(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    use_item_properly(lessee, item) = Lessee(lessee), Item(item)
+    respond_damages(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    return_balance(lessor, rent, lessee) = Lessor(lessor), Rent(rent), Lessee(lessee)
+
+    # Conditional predicates
+    item_service_ready(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    conservation_needed(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    interference_occurring(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    peaceful_use_guaranteed(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    hidden_defects_present(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    timely_delivery_required(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    modification_prohibited(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    improper_use(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    serious_damage(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    balance_due(lessor, rent, lessee) = Lessor(lessor), Rent(rent), Lessee(lessee)
+
+    # @id: Cláusula Primera - Entrega de la Cosa
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    rule_oblig_deliver = oblig(deliver_item(lessor, item, lessee))
+
+    # @id: Cláusula Segunda - Conservación y Reparaciones
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    rule_oblig_maintain = oblig(maintain_item(lessor, item, lessee))
+
+    # @id: Cláusula Tercera - Garantía de Uso Pacífico
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    rule_oblig_peaceful_use = oblig(guarantee_peaceful_use(lessor, item, lessee))
+
+    # @id: Cláusula Cuarta - Responsabilidad por Vicios Ocultos
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    rule_oblig_hidden_defects = oblig(respond_hidden_defects(lessor, item, lessee))
+
+    # @id: Cláusula Quinta - Entrega en Estado de Servicio (Condicional)
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    # Only if item service ready
+    rule_oblig_deliver_service_ready = item_service_ready(lessor, item, lessee) 
+                                       implies oblig(deliver_item_service_ready(lessor, item, lessee))
+
+    # @id: Cláusula Sexta - Conservación de la Cosa (Condicional)
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    # Only if conservation needed
+    rule_oblig_conserve_item = conservation_needed(lessor, item, lessee) 
+                               implies oblig(conserve_item_state(lessor, item, lessee))
+
+    # @id: Cláusula Séptima - No Estorbar el Uso (Condicional)
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    # Only if interference occurring
+    rule_prohibit_interference = interference_occurring(lessor, item, lessee) 
+                                 implies forbid(avoid_interference(lessor, item, lessee))
+
+    # @id: Cláusula Octava - Garantía de Uso Pacífico (Condicional)
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    # Only if peaceful use guaranteed
+    rule_oblig_peaceful_use = peaceful_use_guaranteed(lessor, item, lessee) 
+                              implies oblig(guarantee_peaceful_use(lessor, item, lessee))
+
+    # @id: Cláusula Novena - Responsabilidad por Vicios Ocultos (Condicional)
+    # @derives: CCF_ART2412
+    # @priority: HIGH
+    # Only if hidden defects present
+    rule_oblig_hidden_defects = hidden_defects_present(lessor, item, lessee) 
+                                implies oblig(respond_hidden_defects(lessor, item, lessee))
+
+    # @id: Cláusula Décima - Entrega Oportuna (Condicional)
+    # @derives: CCF_ART2413
+    # @priority: HIGH
+    # Only if timely delivery required
+    rule_oblig_timely_delivery = timely_delivery_required(lessor, item, lessee) 
+                                 implies oblig(deliver_item_timely(lessor, item, lessee))
+
+    # @id: Cláusula Undécima - Prohibición de Modificación (Condicional)
+    # @derives: CCF_ART2414
+    # @priority: HIGH
+    # Only if modification prohibited
+    rule_prohibit_modification = modification_prohibited(lessor, item, lessee) 
+                                 implies forbid(avoid_modification(lessor, item, lessee))
+
+    # @id: Cláusula Duodécima - Uso Conforme al Destino
+    # @derives: CCF_ART2425
+    # @priority: HIGH
+    rule_oblig_proper_use = oblig(use_item_properly(lessee, item))
+
+    # @id: Cláusula Décima Tercera - Responsabilidad por Daños
+    # @derives: CCF_ART2425
+    # @priority: HIGH
+    rule_oblig_damages = oblig(respond_damages(lessee, item, lessor))
+
+    # @id: Cláusula Décima Cuarta - Devolución de Saldo (Condicional)
+    # @derives: CCF_ART2422
+    # @priority: HIGH
+    # Only if balance due
+    rule_oblig_return_balance = balance_due(lessor, rent, lessee) 
+                                  implies oblig(return_balance(lessor, rent, lessee))
+}

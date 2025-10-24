@@ -1,0 +1,12 @@
+# @id: Principio de Reclamo Condicional
+# @derives: CCF_ART1794
+# @priority: HIGH
+#
+# Usage: apply conditional_claim(Condition, ConditionalClaim)
+#
+# Legal Basis: Conditional rights in contract law.
+
+principle conditional_claim(Condition, ConditionalClaim) {
+    conditional_rule = Condition implies claim(ConditionalClaim)
+}
+

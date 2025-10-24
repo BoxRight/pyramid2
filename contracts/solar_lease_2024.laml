@@ -1,0 +1,131 @@
+# Enhanced Solar Lease Contract - DirectObject Composition with Wildcards
+# Tests advanced composition using directObject() results with proper wildcard predicates
+
+# @id: Contrato de Arrendamiento Solar con Opción de Compra
+# @derives: CCF_ART2398, LIE_ART46
+# @priority: HIGH
+
+import "../laws/ccf_core_lease.laml"
+import "../laws/ccf_lease_rights.laml"
+import "../laws/ccf_lease_remedies.laml"
+import "../laws/ccf_rescission_grounds.laml"
+import "../laws/ccf_termination_consequences.laml"
+import "../laws/ccf_lease_special.laml"
+import "../laws/ccf_lease_liability.laml"
+import "../laws/lie_permits_interconnection.laml"
+import "../laws/lie_energy_sales_contracts.laml"
+import "../laws/lie_infrastructure_transmission.laml"
+import "../principles/conditional_claim.laml"
+
+# Step 1: Create law instances needed for solar lease contract
+core_lease_component :- core_lease_law(SolarCorp, HomeOwner, SolarPanelSystem, USD_200_monthly)
+rights_lease_component :- lease_rights_law(SolarCorp, HomeOwner, SolarPanelSystem, USD_200_monthly)
+permits_component :- permits_interconnection_law(SolarCorp, HomeOwner, SolarPanelSystem)
+sales_component :- energy_sales_contracts_law(SolarCorp, HomeOwner, SolarPanelSystem)
+
+# Step 2: Extract claims from needed law components
+core_lease_claims = core_lease_component.directObject()
+rights_lease_claims = rights_lease_component.directObject()
+permits_claims = permits_component.directObject()
+sales_claims = sales_component.directObject()
+
+# Step 3: Validate the individual components
+core_lease_component.valid()
+rights_lease_component.valid()
+permits_component.valid()
+sales_component.valid()
+
+# Step 4: Create a complete solar lease template using directObject claims as parameters
+enhanced_solar_lease(lessor, lessee, system, rent, core_claims, rights_claims, permits_claims, sales_claims) = 
+institution(lessor, lessee, system, rent, core_claims, rights_claims, permits_claims, sales_claims) {
+    
+    # Basic type bindings
+    Lessor(lessor) = Person(lessor, _)
+    Lessee(lessee) = Person(lessee, _)
+    System(system) = Thing(system, _)
+    Rent(rent) = Thing(rent, movable)
+    
+    # Type bindings for directObject claims (these will be passed in instantiation)
+    CoreClaims(core_claims) = Thing(core_claims, movable)
+    RightsClaims(rights_claims) = Thing(rights_claims, movable)
+    PermitsClaims(permits_claims) = Thing(permits_claims, movable)
+    SalesClaims(sales_claims) = Thing(sales_claims, movable)
+    
+    # Core lease acts using the passed claims
+    grant_use(lessor, system, lessee) = Lessor(lessor), System(system), Lessee(lessee)
+    pay_rent(lessee, rent, lessor) = Lessee(lessee), Rent(rent), Lessor(lessor)
+    maintain_system(lessor, core_claims, lessee) = Lessor(lessor), CoreClaims(core_claims), Lessee(lessee)
+    return_system(lessee, system, lessor) = Lessee(lessee), System(system), Lessor(lessor)
+    
+    # Rights acts using the passed claims
+    guarantee_peaceful_use(lessor, rights_claims, lessee) = Lessor(lessor), RightsClaims(rights_claims), Lessee(lessee)
+    deliver_system(lessor, rights_claims, lessee) = Lessor(lessor), RightsClaims(rights_claims), Lessee(lessee)
+    
+    # Generation acts using the passed claims
+    get_representation_permit(lessor, permits_claims, lessee) = Lessor(lessor), PermitsClaims(permits_claims), Lessee(lessee)
+    interconnect(lessor, lessee, system) = Lessor(lessor), Lessee(lessee), System(system)
+    sell_surplus(lessor, sales_claims, lessee) = Lessor(lessor), SalesClaims(sales_claims), Lessee(lessee)
+    
+    # Core lease rules with payment dependencies
+    rule_rent_obligation = grant_use(lessor, system, lessee) 
+                          implies oblig(pay_rent(lessee, rent, lessor))
+    
+    rule_continued_possession = pay_rent(lessee, rent, lessor) 
+                               implies claim(grant_use(lessor, system, lessee))
+    
+    rule_maintenance_obligation = pay_rent(lessee, rent, lessor) 
+                                 implies oblig(maintain_system(lessor, core_claims, lessee))
+    
+    rule_return_obligation = not(pay_rent(lessee, rent, lessor)) 
+                            implies oblig(return_system(lessee, system, lessor))
+    
+    # Generation rules with payment dependencies and logical flow
+    rule_permit_obligation = pay_rent(lessee, rent, lessor) 
+                            implies oblig(get_representation_permit(lessor, permits_claims, lessee))
+    
+    rule_permits_to_interconnect = get_representation_permit(lessor, permits_claims, lessee) 
+                                  implies claim(interconnect(lessor, lessee, system))
+    
+    rule_interconnection_obligation = pay_rent(lessee, rent, lessor) 
+                                     implies oblig(interconnect(lessor, lessee, system))
+    
+    rule_interconnect_to_sales = interconnect(lessor, lessee, system) 
+                                 implies claim(sell_surplus(lessor, sales_claims, lessee))
+    
+    rule_surplus_sale_obligation = pay_rent(lessee, rent, lessor) 
+                                  implies oblig(sell_surplus(lessor, sales_claims, lessee))
+    
+    # Rights rules with payment dependencies
+    rule_guarantee_peaceful_use = pay_rent(lessee, rent, lessor) 
+                                 implies oblig(guarantee_peaceful_use(lessor, rights_claims, lessee))
+    
+    rule_deliver_system = pay_rent(lessee, rent, lessor) 
+                         implies oblig(deliver_system(lessor, rights_claims, lessee))
+    
+    # Cross-cutting rule: payment enables all generation activities
+    rule_payment_enables_generation = pay_rent(lessee, rent, lessor) 
+                                     implies (claim(get_representation_permit(lessor, permits_claims, lessee)) and
+                                             claim(interconnect(lessor, lessee, system)) and
+                                             claim(sell_surplus(lessor, sales_claims, lessee)))
+    
+    # Violation rule: no payment suspends all benefits
+    rule_no_payment_suspends_benefits = not(pay_rent(lessee, rent, lessor)) 
+                                       implies (forbid(grant_use(lessor, system, lessee)) and
+                                               forbid(get_representation_permit(lessor, permits_claims, lessee)) and
+                                               forbid(interconnect(lessor, lessee, system)) and
+                                               forbid(sell_surplus(lessor, sales_claims, lessee)))
+}
+
+# Step 5: Create the enhanced solar lease contract instance
+enhanced_solar_contract :- enhanced_solar_lease(
+    SolarCorp,          # lessor
+    HomeOwner,         # lessee
+    SolarPanelSystem,  # system
+    USD_200_monthly,   # rent
+    core_lease_claims, # core_claims
+    rights_lease_claims, # rights_claims
+    permits_claims,    # permits_claims
+    sales_claims       # sales_claims
+)
+
+enhanced_solar_contract.valid()

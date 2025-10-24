@@ -1,0 +1,20 @@
+{
+  "mexican_lease": {
+    "implies": "implica que",
+    "and": "y",
+    "or": "o",
+    "not": "no"
+  },
+  "us_lease": {
+    "implies": "implies that",
+    "and": "and",
+    "or": "or",
+    "not": "not"
+  },
+  "eu_lease": {
+    "implies": "implies that",
+    "and": "and",
+    "or": "or",
+    "not": "not"
+  }
+}

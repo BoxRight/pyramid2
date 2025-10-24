@@ -1,0 +1,91 @@
+# /laws/lie_permits_interconnection.laml
+import "../principles/reciprocity.laml"
+
+permits_interconnection_law(supplier, user, system) = institution(supplier, user, system) {
+    # Type bindings for specific entities
+    CRE_entity(cre) = Person(cre, legal)
+    CFE_entity(grid) = Person(grid, legal)
+    CENACE_entity(cenace) = Person(cenace, legal)
+    State_entity(state) = Person(state, legal)
+    Landowner_entity(landowner) = Person(landowner, physical)
+    Project_entity(project) = Thing(project, movable)
+    
+    # Core permits and interconnection acts
+    get_representation_permit(supplier, cre, user) = Person(supplier, legal), CRE_entity(cre), Person(user, physical)
+    get_supply_permit(supplier, cre, user) = Person(supplier, legal), CRE_entity(cre), Person(user, physical)
+    interconnect(supplier, system, grid) = Person(supplier, legal), Thing(system, movable), CFE_entity(grid)
+    connect_generator(supplier, system, grid) = Person(supplier, legal), Thing(system, movable), CFE_entity(grid)
+    offer_supply(supplier, supply, user) = Person(supplier, legal), Thing(supply, movable), Person(user, physical)
+    negotiate_land_use(supplier, project, landowner) = Person(supplier, legal), Project_entity(project), Landowner_entity(landowner)
+    form_infrastructure_association(supplier, project, state) = Person(supplier, legal), Project_entity(project), State_entity(state)
+    contribute_infrastructure(supplier, project, grid) = Person(supplier, legal), Project_entity(project), CFE_entity(grid)
+    participate_market(supplier, market, cenace) = Person(supplier, legal), Thing(market, movable), CENACE_entity(cenace)
+    celebrate_supply_contract(supplier, contract, user) = Person(supplier, legal), Thing(contract, movable), Person(user, physical)
+    
+    # Conditional predicates
+    start_qualified_supply(supplier, user) = Person(supplier, legal), Person(user, physical)
+    request_interconnection(supplier, system, grid) = Person(supplier, legal), Thing(system, movable), CFE_entity(grid)
+    technical_feasibility(supplier, system, grid) = Person(supplier, legal), Thing(system, movable), CFE_entity(grid)
+    works_not_included_programs(supplier, project, state) = Person(supplier, legal), Project_entity(project), State_entity(state)
+    start_basic_supply_qualified(supplier, user) = Person(supplier, legal), Person(user, physical)
+
+    # @id: Cláusula Primera - Permiso de Representación
+    # @derives: LIE_ART46
+    # @priority: HIGH
+    rule_oblig_representation_permit = oblig(get_representation_permit(supplier, cre, user))
+
+    # @id: Cláusula Segunda - Permiso de Suministro
+    # @derives: LIE_ART46
+    # @priority: HIGH
+    rule_oblig_supply_permit = oblig(get_supply_permit(supplier, cre, user))
+
+    # @id: Cláusula Tercera - Interconexión y Conexión (Condicional)
+    # @derives: LIE_ART33
+    # @priority: HIGH
+    # Only if there's a connection request AND technical feasibility
+    rule_oblig_interconnect = (request_interconnection(supplier, system, grid) and 
+                              technical_feasibility(supplier, system, grid)) 
+                              implies oblig(interconnect(supplier, system, grid))
+    rule_oblig_connect_generator = (request_interconnection(supplier, system, grid) and 
+                                   technical_feasibility(supplier, system, grid)) 
+                                   implies oblig(connect_generator(supplier, system, grid))
+
+    # @id: Cláusula Cuarta - Oferta de Suministro Básico (Condicional)
+    # @derives: LIE_ART48
+    # @priority: HIGH
+    # Only if supplier has permit AND user is not qualified
+    rule_oblig_offer_supply = (get_supply_permit(supplier, cre, user) and 
+                               start_basic_supply_qualified(supplier, user)) 
+                               implies oblig(offer_supply(supplier, supply, user))
+
+    # @id: Cláusula Cuarta Bis - Contrato de Suministro Obligatorio (Condicional)
+    # @derives: LIE_ART51
+    # @priority: HIGH
+    # Only if supplier has permit AND starts qualified supply
+    rule_oblig_supply_contract = (get_supply_permit(supplier, cre, user) and 
+                                  start_qualified_supply(supplier, user)) 
+                                  implies oblig(celebrate_supply_contract(supplier, contract, user))
+
+    # @id: Cláusula Quinta - Negociación de Uso Superficial
+    # @derives: LIE_ART74
+    # @priority: MEDIUM
+    rule_oblig_negotiate_land = oblig(negotiate_land_use(supplier, project, landowner))
+
+    # @id: Cláusula Sexta - Asociaciones de Infraestructura
+    # @derives: LIE_ART30
+    # @priority: MEDIUM
+    rule_right_form_association = claim(form_infrastructure_association(supplier, project, state))
+
+    # @id: Cláusula Séptima - Aportaciones de Infraestructura (Condicional)
+    # @derives: LIE_ART35
+    # @priority: MEDIUM
+    # Only if works are not included in programs AND there's a connection request
+    rule_right_contribute = (works_not_included_programs(supplier, project, state) and 
+                             request_interconnection(supplier, system, grid)) 
+                             implies claim(contribute_infrastructure(supplier, project, grid))
+
+    # @id: Cláusula Octava - Participación en Mercado
+    # @derives: LIE_ART98
+    # @priority: MEDIUM
+    rule_oblig_participate_market = oblig(participate_market(supplier, market, cenace))
+}

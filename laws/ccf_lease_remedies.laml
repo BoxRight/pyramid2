@@ -1,0 +1,86 @@
+# /laws/ccf_lease_remedies.laml
+
+lease_remedies_law(lessor, lessee, item, rent) = institution(lessor, lessee, item, rent) {
+    # Type bindings
+    Lessor(lessor)   = Person(lessor, _)
+    Lessee(lessee)   = Person(lessee, _)
+    Item(item)       = Thing(item, _)
+    Rent(rent)       = Thing(rent, movable)
+
+    # Repair and damage acts
+    notify_repairs(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    respond_damages(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    suspend_rent(lessee, rent, lessor) = Lessee(lessee), Rent(rent), Lessor(lessor)
+    reduce_rent(lessee, rent, lessor) = Lessee(lessee), Rent(rent), Lessor(lessor)
+    choose_remedy(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    claim_damages(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    request_rent_reduction(lessee, rent, lessor) = Lessee(lessee), Rent(rent), Lessor(lessor)
+    request_contract_rescission(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+
+    # Conditional predicates
+    need_repairs(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    improper_use(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    serious_damage(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    maintenance_failure(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    hidden_defects_exist(lessor, item, lessee) = Lessor(lessor), Item(item), Lessee(lessee)
+    total_impediment(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    partial_impediment(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    remedy_choice_available(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    damages_claimable(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+    rent_reduction_requestable(lessee, rent, lessor) = Lessee(lessee), Rent(rent), Lessor(lessor)
+    rescission_requestable(lessee, item, lessor) = Lessee(lessee), Item(item), Lessor(lessor)
+
+    # @id: Cláusula Primera - Notificación de Reparaciones
+    # @derives: CCF_ART2415
+    # @priority: HIGH
+    # Only if repairs needed
+    rule_oblig_notify_repairs = need_repairs(lessee, item, lessor) 
+                                implies oblig(notify_repairs(lessee, item, lessor))
+
+    # @id: Cláusula Segunda - Responsabilidad por Daños
+    # @derives: CCF_ART2415
+    # @priority: HIGH
+    rule_oblig_damages = oblig(respond_damages(lessee, item, lessor))
+
+    # @id: Cláusula Tercera - Suspensión Total de Renta
+    # @derives: CCF_ART2416
+    # @priority: HIGH
+    # Only if total impediment
+    rule_suspend_rent_total = total_impediment(lessee, item, lessor) 
+                              implies oblig(suspend_rent(lessee, rent, lessor))
+
+    # @id: Cláusula Cuarta - Reducción Parcial de Renta
+    # @derives: CCF_ART2417
+    # @priority: HIGH
+    # Only if partial impediment
+    rule_reduce_rent_partial = partial_impediment(lessee, item, lessor) 
+                               implies oblig(reduce_rent(lessee, rent, lessor))
+
+    # @id: Cláusula Quinta - Elección de Remedio
+    # @derives: CCF_ART2415
+    # @priority: HIGH
+    # Only if remedy choice available
+    rule_right_choose_remedy = remedy_choice_available(lessee, item, lessor) 
+                               implies claim(choose_remedy(lessee, item, lessor))
+
+    # @id: Cláusula Sexta - Reclamación de Daños
+    # @derives: CCF_ART2415
+    # @priority: HIGH
+    # Only if damages claimable
+    rule_right_claim_damages = damages_claimable(lessee, item, lessor) 
+                               implies claim(claim_damages(lessee, item, lessor))
+
+    # @id: Cláusula Séptima - Solicitud de Reducción de Renta
+    # @derives: CCF_ART2416
+    # @priority: HIGH
+    # Only if rent reduction requestable
+    rule_right_rent_reduction = rent_reduction_requestable(lessee, rent, lessor) 
+                                implies claim(request_rent_reduction(lessee, rent, lessor))
+
+    # @id: Cláusula Octava - Solicitud de Rescisión de Contrato
+    # @derives: CCF_ART2417
+    # @priority: HIGH
+    # Only if rescission requestable
+    rule_right_contract_rescission = rescission_requestable(lessee, item, lessor) 
+                                     implies claim(request_contract_rescission(lessee, item, lessor))
+}

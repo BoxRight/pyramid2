@@ -1,0 +1,13 @@
+# Good Faith Principle
+#
+# Requires that certain actions be accompanied by proper notification or disclosure.
+# Common in contractual relationships where one party's actions affect the other.
+#
+# Usage: apply good_faith(MainAction, RequiredNotice)
+#
+# Legal Basis: Implied covenant of good faith and fair dealing in contracts.
+
+principle good_faith(MainAction, RequiredNotice) {
+    notice_obligation = MainAction implies oblig(RequiredNotice)
+}
+
