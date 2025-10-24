@@ -3,11 +3,6 @@
 
 import "../laws/ccf_core_lease.laml"
 
-# Basic type definitions
-SolarCorp = Person(SolarCorp, corporate)
-HomeOwner = Person(HomeOwner, individual)
-SolarPanelSystem = Thing(SolarPanelSystem, movable)
-USD_200_monthly = Thing(USD_200_monthly, movable)
 
 # Create law component and extract claims
 core_lease_component :- core_lease_law(SolarCorp, HomeOwner, SolarPanelSystem, USD_200_monthly)

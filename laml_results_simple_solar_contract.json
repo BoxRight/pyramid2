@@ -1,0 +1,44 @@
+{
+  "satisfiable": true,
+  "mappings": {
+    "4": {
+      "predicate": "return_system",
+      "args": ["HomeOwner", "SolarPanelSystem", "SolarCorp"],
+      "full": "return_system(HomeOwner, SolarPanelSystem, SolarCorp)"
+    },
+    "3": {
+      "predicate": "maintain_system",
+      "args": ["SolarCorp", "core_lease_claims", "HomeOwner"],
+      "full": "maintain_system(SolarCorp, core_lease_claims, HomeOwner)"
+    },
+    "2": {
+      "predicate": "pay_rent",
+      "args": ["HomeOwner", "USD_200_monthly", "SolarCorp"],
+      "full": "pay_rent(HomeOwner, USD_200_monthly, SolarCorp)"
+    },
+    "1": {
+      "predicate": "grant_use",
+      "args": ["SolarCorp", "SolarPanelSystem", "HomeOwner"],
+      "full": "grant_use(SolarCorp, SolarPanelSystem, HomeOwner)"
+    }
+  },
+  "claims": {
+    "explicit": [
+
+    ],
+    "obligations": [
+      {"predicate": "pay_rent", "args": ["HomeOwner", "USD_200_monthly", "SolarCorp"]},
+      {"predicate": "maintain_system", "args": ["SolarCorp", "core_lease_claims", "HomeOwner"]}
+    ],
+    "prohibitions": [
+
+    ]
+  },
+  "solutions": [
+    [1, 2, 3],
+    [1, 2, 3, 4],
+    [3, 4],
+    [4]
+  ],
+  "num_solutions": 4
+}
