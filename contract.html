@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang='es'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Contrato Legal</title>
+    <style>
+        body { font-family: 'Times New Roman', serif; line-height: 1.6; margin: 40px; }
+        .contract-title { text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 30px; }
+        .section-title { font-size: 18px; font-weight: bold; margin-top: 30px; margin-bottom: 15px; text-transform: uppercase; }
+        .clause { margin-bottom: 15px; }
+        .clause-id { font-weight: bold; }
+        .declaration { margin-bottom: 20px; }
+        .declaration-title { font-weight: bold; margin-bottom: 10px; }
+        .declaration-item { margin-left: 20px; margin-bottom: 5px; }
+        .object-item { margin-bottom: 10px; }
+        .signature-section { margin-top: 40px; text-align: center; }
+        .signature-line { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class='contract-title'>CONTRATO DE SIMPLE_SOLAR_LEASE</div>
+    <p><strong>Normativa:</strong> ../laws/ccf_core_lease.laml</p>
+    <p><strong>Supuesto:</strong> Contrato de simple_solar_lease entre lessor, lessee.</p>
+    <p>CONTRATO QUE CONSTITUYEN LESSOR, LESSEE, SUJETÁNDOSE PARA ELLO LA TENOR DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:</p>
+    <div class='section-title'>OBJETOS</div>
+    <div class='object-item'>I.- <strong>SYSTEM</strong>.- objeto denominado system.</div>
+    <div class='object-item'>II.- <strong>RENT</strong>.- bien mueble denominado rent.</div>
+    <div class='object-item'>III.- <strong>CORE_CLAIMS</strong>.- bien mueble denominado core_claims.</div>
+    <div class='section-title'>DECLARACIONES</div>
+    <div class='declaration'>
+        <div class='declaration-title'>I.-- Declara "lessor":</div>
+        <div class='declaration-item'>a. Declara 'LESSOR', ser persona física con capacidad legal para contratar y obligarse en el presente contrato.</div>
+        <div class='declaration-item'>b. Que cuenta con la capacidad legal y económica para la celebración de este contrato.</div>
+        <div class='declaration-item'>c. Que desea adquirir los derechos de lessor en el presente contrato.</div>
+    </div>
+    <div class='declaration'>
+        <div class='declaration-title'>II.-- Declara "lessee":</div>
+        <div class='declaration-item'>a. Declara 'LESSEE', ser persona física con capacidad legal para contratar y obligarse en el presente contrato.</div>
+        <div class='declaration-item'>b. Que cuenta con la capacidad legal y económica para la celebración de este contrato.</div>
+        <div class='declaration-item'>c. Que desea adquirir los derechos de lessee en el presente contrato.</div>
+    </div>
+    <div class='declaration'>
+        <div class='declaration-title'>III.-- Declaran ambas partes:</div>
+        <div class='declaration-item'>a. Que se reconocen la personalidad con la que se ostentan dentro del presente contrato por lo que el mismo carece de vicios, dolo o mala fe.</div>
+        <div class='declaration-item'>b. Que cuentan con la capacidad legal y económica para la celebración de este contrato.</div>
+        <div class='declaration-item'>c. Que ambas partes conocen la naturaleza del presente contrato, saben y aceptan sus condiciones, así como el alcance de sus efectos respecto del cumplimiento o incumplimiento del mismo.</div>
+    </div>
+    <div class='section-title'>CLÁUSULAS</div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 1.- ACTO DE GRANT USE.-</span> Las partes reconocen el acto jurídico que realiza lessor frente a lessee con objeto de system.
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 2.- ACTO DE PAY RENT.-</span> Las partes reconocen el acto jurídico que realiza lessee frente a lessor con objeto de rent.
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 3.- ACTO DE MAINTAIN SYSTEM.-</span> Las partes reconocen el acto jurídico que realiza lessor frente a lessee con objeto de core_claims.
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 4.- ACTO DE RETURN SYSTEM.-</span> Las partes reconocen el acto jurídico que realiza lessee frente a lessor con objeto de system.
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 5.- OBLIGACIÓN DE RENT_OBLIGATION.-</span> En el supuesto de que se realiza el acto donde 'lessor' transfiere Grant use de 'system' a 'lessee', entonces 'lessee' queda obligado a transfiere Pay rent de 'rent' a 'lessor'
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 6.- OBLIGACIÓN DE CONTINUED_POSSESSION.-</span> En el supuesto de que se realiza el acto donde 'lessee' transfiere Pay rent de 'rent' a 'lessor', entonces 'lessee' tiene el derecho de exigir que 'lessor' transfiere Grant use de 'system' a 'lessee'
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 7.- OBLIGACIÓN DE MAINTENANCE_OBLIGATION.-</span> En el supuesto de que se realiza el acto donde 'lessee' transfiere Pay rent de 'rent' a 'lessor', entonces 'lessor' queda obligado a transfiere Maintain system de 'core_claims' a 'lessee'
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 8.- OBLIGACIÓN DE RETURN_OBLIGATION.-</span> En el supuesto de que no se cumpla con que se realiza el acto donde 'lessee' transfiere Pay rent de 'rent' a 'lessor', entonces 'lessee' queda obligado a transfiere Return system de 'system' a 'lessor'
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 9.- TERMINACIÓN.-</span> Las partes podrán dar por terminado el presente contrato por mutuo acuerdo, el cual deberá constar por escrito.
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 10.- JURISDICCIÓN.-</span> Las partes se someten a la jurisdicción de los Tribunales competentes para la interpretación y ejecución de los pactos que anteceden.
+    </div>
+    <div class='clause'>
+        <span class='clause-id'>Cláusula 11.- GASTOS.-</span> Las partes convienen en que los gastos, derechos y honorarios que devengue el otorgamiento respectivo, serán por cuenta y cargo de las partes.
+    </div>
+    <div class='signature-section'>
+        <p>Así convenido y sabedores del valor, fuerza y alcance legales del contenido de este contrato, las partes lo firman por duplicado a los _____ días del mes de _____.</p>
+        <br>
+        <div class='signature-line'>EL LESSOR</div>
+        <br>
+        <div class='signature-line'>EL LESSEE</div>
+        <br>
+    </div>
+</body>
+</html>

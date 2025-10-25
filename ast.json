@@ -84,7 +84,7 @@
               "type": "TypeBinding",
               "predicate": "System",
               "variable": "system",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -117,8 +117,8 @@
               "type": "TypeBinding",
               "predicate": "Rent",
               "variable": "rent",
-              "base_type": "Person",
-              "subtype": "_"
+              "base_type": "Thing",
+              "subtype": "movable"
             },
             {
               "type": "TypeBinding",
@@ -150,8 +150,8 @@
               "type": "TypeBinding",
               "predicate": "CoreClaims",
               "variable": "core_claims",
-              "base_type": "Person",
-              "subtype": "_"
+              "base_type": "Thing",
+              "subtype": "movable"
             },
             {
               "type": "TypeBinding",
@@ -183,7 +183,7 @@
               "type": "TypeBinding",
               "predicate": "System",
               "variable": "system",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -406,7 +406,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -439,8 +439,8 @@
               "type": "TypeBinding",
               "predicate": "Rent",
               "variable": "rent",
-              "base_type": "Person",
-              "subtype": "_"
+              "base_type": "Thing",
+              "subtype": "movable"
             },
             {
               "type": "TypeBinding",
@@ -480,15 +480,15 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
               "type": "TypeBinding",
               "predicate": "Rent",
               "variable": "rent",
-              "base_type": "Person",
-              "subtype": "_"
+              "base_type": "Thing",
+              "subtype": "movable"
             }
           ]
         },
@@ -513,8 +513,8 @@
               "type": "TypeBinding",
               "predicate": "Rent",
               "variable": "rent",
-              "base_type": "Person",
-              "subtype": "_"
+              "base_type": "Thing",
+              "subtype": "movable"
             },
             {
               "type": "TypeBinding",
@@ -546,7 +546,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -579,7 +579,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -612,7 +612,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -645,7 +645,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             },
             {
@@ -685,7 +685,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             }
           ]
@@ -718,7 +718,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             }
           ]
@@ -751,7 +751,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             }
           ]
@@ -784,7 +784,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             }
           ]
@@ -817,7 +817,7 @@
               "type": "TypeBinding",
               "predicate": "Item",
               "variable": "item",
-              "base_type": "Person",
+              "base_type": "Thing",
               "subtype": "_"
             }
           ]
