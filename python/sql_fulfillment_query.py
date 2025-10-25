@@ -67,7 +67,7 @@ class SQLFulfillmentAnalyzer:
             
             # Step 3: Find solutions where predicate is TRUE (vector analysis)
             # This is the key SQL query that replicates the Python logic
-            query = """
+            query = """ --sql
             WITH fulfillment_solutions AS (
                 -- Find all solutions in this contract that contain the target predicate
                 SELECT DISTINCT s.solution_id
