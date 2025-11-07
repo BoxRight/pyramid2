@@ -1,0 +1,116 @@
+.action-panel {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-primary);
+  border-left: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: -2px 0 4px rgba(0, 0, 0, 0.05);
+}
+
+.action-panel-header {
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-primary);
+  padding: 0;
+}
+
+.action-panel-tabs {
+  display: flex;
+  gap: 0;
+}
+
+.action-tab {
+  flex: 1;
+  padding: 16px 24px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-family: inherit;
+}
+
+.action-tab:hover:not(.active) {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.action-tab.active {
+  color: var(--primary-blue);
+  border-bottom-color: var(--primary-blue);
+  background: var(--bg-primary);
+}
+
+.action-panel-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.analyze-tab,
+.query-tab {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override QueryInterface styles when in panel */
+.action-panel .query-interface {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-panel .query-interface .view-header {
+  display: none;
+}
+
+.action-panel .query-interface .view-content {
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-panel .query-container {
+  flex: 1;
+  display: flex !important; /* Override grid layout */
+  flex-direction: column;
+  gap: 16px;
+  max-width: 100%;
+  margin: 0;
+}
+
+.action-panel .query-form-section {
+  flex: 0 0 auto;
+}
+
+.action-panel .query-results-section {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Override ContractSummary styles when in panel */
+.action-panel .contract-summary {
+  gap: 20px;
+}
+
+.action-panel .summary-card {
+  padding: 20px;
+}
+
+.action-panel .metrics-grid {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.action-panel .metric-card {
+  padding: 16px;
+}
+

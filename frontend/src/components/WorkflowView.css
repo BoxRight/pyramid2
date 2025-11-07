@@ -1,0 +1,89 @@
+.workflow-view {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.workflow-view-single {
+  width: 100%;
+}
+
+.workflow-view-two-panel {
+  display: flex;
+  height: 100%;
+  position: relative;
+}
+
+.main-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0; /* Allow flex item to shrink */
+  background: var(--bg-secondary);
+}
+
+.action-panel-wrapper {
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.resize-handle {
+  width: 4px;
+  background: var(--border-primary);
+  cursor: col-resize;
+  flex-shrink: 0;
+  transition: background-color var(--transition-fast);
+  position: relative;
+}
+
+.resize-handle:hover,
+.resize-handle.resizing {
+  background: var(--primary-blue);
+}
+
+.resize-handle::before {
+  content: '';
+  position: absolute;
+  left: -2px;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  cursor: col-resize;
+}
+
+/* Remove header from ContractReview when in two-panel layout */
+.workflow-view-two-panel .contract-review {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow-view-two-panel .contract-review .view-header {
+  display: none;
+}
+
+.workflow-view-two-panel .contract-review .view-content {
+  padding: 0;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow-view-two-panel .review-container {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.workflow-view-two-panel .document-section {
+  flex: 1;
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  overflow-y: auto;
+}

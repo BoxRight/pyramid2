@@ -1,0 +1,29 @@
+.mock-data-indicator {
+  background: var(--semantic-amber-light);
+  border: 1px solid var(--semantic-amber);
+  border-left: 4px solid var(--semantic-amber);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.indicator-icon {
+  font-size: 16px;
+  opacity: 0.8;
+}
+
+.indicator-text {
+  font-weight: 500;
+  color: var(--semantic-amber);
+}
+
+.indicator-hint {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-left: 4px;
+}
+

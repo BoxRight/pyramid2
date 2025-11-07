@@ -1,0 +1,263 @@
+.sidebar {
+  width: 280px;
+  background: var(--bg-primary);
+  border-right: 1px solid var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--border-primary);
+  background: var(--bg-primary);
+}
+
+.sidebar-header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+
+.sidebar-subtitle {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.workflow-steps {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.workflow-step-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 6px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+  text-align: left;
+}
+
+.workflow-step-item:hover:not(.disabled) {
+  background: var(--bg-secondary);
+  border-color: var(--border-secondary);
+}
+
+.workflow-step-item.active {
+  background: var(--primary-blue-light);
+  border-color: var(--primary-blue);
+  color: var(--text-primary);
+}
+
+.workflow-step-item.completed {
+  border-color: var(--semantic-green);
+}
+
+.workflow-step-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--bg-tertiary);
+}
+
+.workflow-step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-right: 12px;
+  flex-shrink: 0;
+  transition: background-color var(--transition-normal);
+  border: 1px solid var(--border-primary);
+}
+
+.workflow-step-item.active .workflow-step-number {
+  background: var(--primary-blue);
+  color: #FFFFFF;
+  border-color: var(--primary-blue);
+}
+
+.workflow-step-item.completed .workflow-step-number {
+  background: var(--semantic-green);
+  color: #FFFFFF;
+  border-color: var(--semantic-green);
+}
+
+.workflow-step-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.workflow-step-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: color var(--transition-normal);
+}
+
+.workflow-step-item.active .workflow-step-label {
+  color: #ffffff;
+}
+
+.workflow-step-icon {
+  font-size: 18px;
+  margin-left: 10px;
+  opacity: 0.7;
+}
+
+.workflow-step-check {
+  position: absolute;
+  right: 16px;
+  color: var(--semantic-green);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.sidebar-actions {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.start-over-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.start-over-button:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-secondary);
+}
+
+.action-icon {
+  font-size: 16px;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-align: left;
+  color: #cccccc;
+}
+
+.nav-item:hover {
+  background: #2a2d2e;
+}
+
+.nav-item.active {
+  background: #094771;
+  color: #ffffff;
+}
+
+.nav-icon {
+  margin-right: 10px;
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.nav-label {
+  font-size: 14px;
+}
+
+.sidebar-contracts {
+  border-top: 1px solid var(--border-primary);
+  padding: 16px;
+  max-height: 300px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.sidebar-section-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding: 0 4px;
+}
+
+.contract-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contract-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+  text-align: left;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.contract-item:hover {
+  background: var(--bg-secondary);
+  border-color: var(--border-secondary);
+}
+
+.contract-icon {
+  margin-right: 10px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.contract-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+

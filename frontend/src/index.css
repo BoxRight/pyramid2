@@ -1,0 +1,234 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Professional Legal-Tech Color Palette */
+  /* Base: Clean, high-contrast white space */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --bg-tertiary: #F3F4F6;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FAFBFC;
+  
+  /* Borders: Subtle, professional */
+  --border-primary: #E0E0E0;
+  --border-secondary: #D0D0D0;
+  --border-accent: #CCD5E0;
+  
+  /* Primary Brand: Deep, conservative blue */
+  --primary-blue: #003366;
+  --primary-blue-hover: #004488;
+  --primary-blue-light: #E6F0F8;
+  
+  /* Text: High contrast, readable */
+  --text-primary: #202020;
+  --text-secondary: #4A4A4A;
+  --text-tertiary: #6B6B6B;
+  --text-muted: #9A9A9A;
+  
+  /* Semantic Colors: Reserved for specific meanings */
+  --semantic-red: #D9534F;        /* Violations, errors, risks */
+  --semantic-red-light: #F8E6E5; /* Red background tint */
+  --semantic-green: #5CB85C;     /* Success, fulfillment, no issues */
+  --semantic-green-light: #E8F5E9; /* Green background tint */
+  --semantic-amber: #F0AD4E;     /* Warnings, requires review */
+  --semantic-amber-light: #FEF5E7; /* Amber background tint */
+  --semantic-blue: #0275D8;      /* Informational, selected items */
+  --semantic-blue-light: #E6F3FC; /* Blue background tint */
+  
+  /* Shadows: Subtle, professional */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.12);
+  
+  /* Border Radius: Conservative */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  
+  /* Transitions: Subtle, professional */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  height: 100vh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+}
+
+/* Scrollbar styling - Subtle */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-secondary);
+}
+
+/* Button styles - Professional, conservative */
+button {
+  background-color: var(--primary-blue);
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  transition: background-color var(--transition-normal);
+  box-shadow: none;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--primary-blue-hover);
+}
+
+button:active:not(:disabled) {
+  background-color: var(--primary-blue);
+}
+
+button:disabled {
+  background-color: var(--bg-tertiary);
+  color: var(--text-muted);
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-primary);
+}
+
+button.secondary:hover:not(:disabled) {
+  background-color: var(--bg-secondary);
+  border-color: var(--border-secondary);
+}
+
+button.success {
+  background-color: var(--semantic-green);
+  color: #FFFFFF;
+}
+
+button.success:hover:not(:disabled) {
+  background-color: #4CAF50;
+}
+
+button.danger {
+  background-color: var(--semantic-red);
+  color: #FFFFFF;
+}
+
+button.danger:hover:not(:disabled) {
+  background-color: #C9302C;
+}
+
+/* Input styles - Professional form elements */
+input, textarea, select {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  line-height: 1.5;
+  transition: border-color var(--transition-normal);
+  width: 100%;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px var(--primary-blue-light);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* Code/monospace font */
+code, pre {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Courier New', monospace;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--accent-primary);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+/* Message styles - Semantic, clear */
+.error-message {
+  background: var(--semantic-red-light);
+  color: var(--semantic-red);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--semantic-red);
+  margin: 16px 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.success-message {
+  background: var(--semantic-green-light);
+  color: #2E7D32;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--semantic-green);
+  margin: 16px 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.info-message {
+  background: var(--semantic-blue-light);
+  color: var(--semantic-blue);
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--semantic-blue);
+  margin: 16px 0;
+  box-shadow: var(--shadow-sm);
+}
+

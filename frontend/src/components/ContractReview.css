@@ -1,0 +1,33 @@
+.contract-review {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.processing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.review-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+.document-section {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+}
+
+.document-section.full-view {
+  width: 100%;
+}
