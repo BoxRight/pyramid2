@@ -1,31 +1,40 @@
-.env
-.venv
-__pycache__
-*.pyc
-*.pyo
-*.pyd
-*.pyw
-*.pyz
-*.pywz
-*.pyzw
-*.pyzwz
-*.pyzwzw
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
 venv/
-.venv/
+env/
+ENV/
+
+# Backend data storage
+data/
+
+# Compiler outputs (temporary files)
+laml_results_*.json
+witness_*.json
+solver_*.bin
+solver_*.txt
+
+# Environment variables
 .env
 .env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.development
-.env.test
-.env.production
-python/py_cache/
-python/pycache/
-python/__pycache__/
-python/py_cache/
-python/pycache/
-python/__pycache__/
-python/py_cache/
-python/pycache/
-python/__pycache__/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Logs
+*.log

@@ -1,0 +1,279 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: LAML Legal Contract Analysis Service - Serverless Architecture
+
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues: [dev, staging, prod]
+  
+  S3BucketName:
+    Type: String
+    Default: laml-contracts-service
+
+Globals:
+  Function:
+    Runtime: python3.12
+    Timeout: 300
+    MemorySize: 512
+    Environment:
+      Variables:
+        ENVIRONMENT: !Ref Environment
+        S3_BUCKET: !Ref S3BucketName
+        CONTRACTS_TABLE: !Ref ContractsTable
+        PREDICATES_TABLE: !Ref PredicatesTable
+        SOLUTIONS_TABLE: !Ref SolutionsTable
+        ANALYSIS_TABLE: !Ref AnalysisTable
+
+Resources:
+  # DynamoDB Tables
+  ContractsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${Environment}-Contracts'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: contract_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: contract_id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: contract_name-index
+          KeySchema:
+            - AttributeName: contract_name
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  PredicatesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${Environment}-Predicates'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: contract_id
+          AttributeType: S
+        - AttributeName: predicate_id
+          AttributeType: S
+        - AttributeName: predicate_name
+          AttributeType: S
+      KeySchema:
+        - AttributeName: contract_id
+          KeyType: HASH
+        - AttributeName: predicate_id
+          KeyType: RANGE
+      GlobalSecondaryIndexes:
+        - IndexName: predicate_name-index
+          KeySchema:
+            - AttributeName: predicate_name
+              KeyType: HASH
+            - AttributeName: contract_id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  SolutionsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${Environment}-Solutions'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: contract_id
+          AttributeType: S
+        - AttributeName: solution_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: contract_id
+          KeyType: HASH
+        - AttributeName: solution_id
+          KeyType: RANGE
+
+  AnalysisTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub '${Environment}-AnalysisResults'
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: contract_id
+          AttributeType: S
+        - AttributeName: analysis_key
+          AttributeType: S
+      KeySchema:
+        - AttributeName: contract_id
+          KeyType: HASH
+        - AttributeName: analysis_key
+          KeyType: RANGE
+
+  # Lambda Functions
+  QueryFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-laml-query'
+      CodeUri: ../../lambda/query/
+      Handler: handler.lambda_handler
+      MemorySize: 512
+      Timeout: 30
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref PredicatesTable
+        - DynamoDBReadPolicy:
+            TableName: !Ref SolutionsTable
+        - DynamoDBReadPolicy:
+            TableName: !Ref AnalysisTable
+        - S3ReadPolicy:
+            BucketName: !Ref S3BucketName
+      Events:
+        QueryApi:
+          Type: Api
+          Properties:
+            Path: /contracts/query
+            Method: post
+
+  CompilerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-laml-compiler'
+      CodeUri: ../../lambda/compiler/
+      Handler: handler.lambda_handler
+      MemorySize: 1024
+      Timeout: 300
+      Policies:
+        - S3ReadPolicy:
+            BucketName: !Ref S3BucketName
+        - S3WritePolicy:
+            BucketName: !Ref S3BucketName
+      Events:
+        CompileApi:
+          Type: Api
+          Properties:
+            Path: /contracts/compile
+            Method: post
+
+  AnalyzerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-laml-analyzer'
+      CodeUri: ../../lambda/analyzer/
+      Handler: handler.lambda_handler
+      MemorySize: 1024
+      Timeout: 900
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref ContractsTable
+        - DynamoDBWritePolicy:
+            TableName: !Ref PredicatesTable
+        - DynamoDBWritePolicy:
+            TableName: !Ref SolutionsTable
+        - DynamoDBWritePolicy:
+            TableName: !Ref AnalysisTable
+        - S3ReadPolicy:
+            BucketName: !Ref S3BucketName
+        - S3WritePolicy:
+            BucketName: !Ref S3BucketName
+
+  GeneratorFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-contract-generator'
+      CodeUri: ../../lambda/generator/
+      Handler: handler.lambda_handler
+      MemorySize: 512
+      Timeout: 120
+      Events:
+        GenerateApi:
+          Type: Api
+          Properties:
+            Path: /contracts/generate
+            Method: post
+
+  RendererFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub '${Environment}-contract-renderer'
+      CodeUri: ../../lambda/renderer/
+      Handler: handler.lambda_handler
+      MemorySize: 512
+      Timeout: 30
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ContractsTable
+        - S3ReadPolicy:
+            BucketName: !Ref S3BucketName
+        - S3WritePolicy:
+            BucketName: !Ref S3BucketName
+      Events:
+        RenderApi:
+          Type: Api
+          Properties:
+            Path: /contracts/{id}/html
+            Method: get
+
+  # Step Functions State Machine
+  ContractProcessingWorkflow:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: !Sub '${Environment}-ContractProcessing'
+      DefinitionString: !Sub |
+        {
+          "Comment": "Contract processing workflow",
+          "StartAt": "CompileContract",
+          "States": {
+            "CompileContract": {
+              "Type": "Task",
+              "Resource": "${CompilerFunction.Arn}",
+              "Next": "StoreAST",
+              "Catch": [{
+                "ErrorEquals": ["States.TaskFailed"],
+                "Next": "HandleError"
+              }]
+            },
+            "StoreAST": {
+              "Type": "Task",
+              "Resource": "${AnalyzerFunction.Arn}",
+              "Next": "RunAnalysis",
+              "Catch": [{
+                "ErrorEquals": ["States.TaskFailed"],
+                "Next": "HandleError"
+              }]
+            },
+            "RunAnalysis": {
+              "Type": "Task",
+              "Resource": "${AnalyzerFunction.Arn}",
+              "End": true
+            },
+            "HandleError": {
+              "Type": "Fail",
+              "Error": "ProcessingFailed",
+              "Cause": "Contract processing failed"
+            }
+          }
+        }
+
+  # S3 Bucket
+  ContractsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref S3BucketName
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+Outputs:
+  ApiUrl:
+    Description: API Gateway endpoint URL
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/${Environment}'
+  
+  ContractsTableName:
+    Description: Contracts DynamoDB table name
+    Value: !Ref ContractsTable
+  
+  StateMachineArn:
+    Description: Step Functions state machine ARN
+    Value: !Ref ContractProcessingWorkflow
+
